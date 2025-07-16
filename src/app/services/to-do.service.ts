@@ -8,13 +8,32 @@ import { ToDoList } from '../Modal/ToDoListModal';
 })
 export class ToDoService {
 
-  
-   private readonly apiUrl = 'https://jsonplaceholder.typicode.com/posts';
+  private readonly apiUrl = 'http://localhost:3000/posts';
 
   constructor(private http: HttpClient) {}
 
+  /** GET all todos */
+  getToDos(): Observable<ToDoList[]> {
+    return this.http.get<ToDoList[]>(this.apiUrl);
+  }
+
+  /** GET single todo by id */
+  getToDo(id: number): Observable<ToDoList> {
+    return this.http.get<ToDoList>(`${this.apiUrl}/${id}`);
+  }
+
+  /** CREATE a new todo */
   addToDo(todo: ToDoList): Observable<ToDoList> {
-    console.log(todo)
     return this.http.post<ToDoList>(this.apiUrl, todo);
+  }
+
+  /** UPDATE an existing todo (full replace) */
+  updateToDo(todo: ToDoList): Observable<ToDoList> {
+    return this.http.put<ToDoList>(`${this.apiUrl}/${todo.id}`, todo);
+  }
+
+  /** DELETE a todo by id */
+  deleteToDo(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }
