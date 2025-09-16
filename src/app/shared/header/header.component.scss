@@ -1,10 +1,25 @@
-.header {
-  height: 40px;
-  background-color: #085fb4;
+/* **  header.component.css  ** */
+
+.header{
+    background-color: #5b036c;/*#ff0090*/
+    color: white;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.header-links{
   display: flex;
-  flex-direction: row;
+  gap: 1rem;
   align-items: center;
-  padding: 15px;
-  color: white;
-  justify-content: space-between;
+  justify-content: end;
+  a{
+    text-decoration: none;
+    color: white;
+}
+.active{
+    border-bottom: 3px #ff0090 solid;
+}
 }

@@ -34,7 +34,11 @@ export class AddTodoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.todolistStore.loadToDoList(); // Initial load
+    this.loadToDos();
+  }
+
+  loadToDos(): void {
+    this.todolistStore.loadToDoList();
   }
 
   onSubmit(): void {
