@@ -22,3 +22,9 @@
   max-width: 1200px;
   height: calc(100vh - 16vh);
 }
+::ng-deep ion-list {
+  &.list-md {
+    height: 250px;
+    overflow-y: auto;
+  }
+}
