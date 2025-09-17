@@ -101,9 +101,9 @@ export class ToDoListStore extends ComponentStore<ToDoListState> {
   /**
    * DELETE
    */
-  readonly deleteToDo = this.effect((id$: Observable<string>) =>
+  readonly deleteToDo = this.effect((id$: Observable<string | number>) =>
     id$.pipe(
-      exhaustMap(id => {
+      exhaustMap((id:number|string) => {
         this.patchState({ loading: true, error: null });
         return this.todoService.deleteToDo(id).pipe(
           tapResponse(

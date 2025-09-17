@@ -1,4 +1,34 @@
-<p>list-todo works!</p>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus similique eos est voluptatum libero repellat dolores fugiat, inventore nulla qui repellendus aspernatur possimus tempore quo, ad aperiam magnam distinctio veniam?</p>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, excepturi possimus asperiores sequi molestias alias maxime culpa necessitatibus, nemo labore voluptates deleniti quas eos dignissimos autem recusandae porro temporibus dolore.</p>
-<h4>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, at veniam officia, alias voluptatibus sint, iste harum consequatur accusantium aliquam perspiciatis cupiditate laboriosam. Similique nulla assumenda nemo commodi. Odit, aliquam!</h4>
+<ng-container *ngIf="loading$ | async">
+  <ion-list>
+    <ion-item *ngFor="let i of [1,2,3]">
+      <ion-label>
+        <h2><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></h2>
+        <p><ion-skeleton-text animated style="width: 80%"></ion-skeleton-text></p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ng-container>
+
+
+<ng-template #listTpl>
+  <ng-container *ngIf="(error$ | async) as error">
+    <ion-text color="danger">
+      <p>Error: {{ error }}</p>
+    </ion-text>
+  </ng-container>
+</ng-template>
+
+  
+<ion-list *ngIf="todolist$ | async as todos">
+  <ion-item *ngFor="let todo of todos">
+    <ion-label>
+      <h2>{{ todo.title }}</h2>
+      <p>{{ todo.description }}</p>
+      <p>{{ todo.id }}</p>
+      <p>{{ todo.date }}</p>
+      <p>{{ todo.status }}</p>
+    </ion-label>
+    <ion-button (click)="editToDo(todo)" fill="outline" size="small">Edit</ion-button>
+    <ion-button (click)="deleteToDo(todo)" fill="clear" color="danger" size="small">Delete</ion-button>
+  </ion-item>
+</ion-list>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { ToDoList } from '../Modal/ToDoListModal';
 
 @Injectable({
@@ -13,12 +13,20 @@ export class ToDoService {
   constructor(private http: HttpClient) {}
 
   /** GET all todos */
-  getToDos(): Observable<ToDoList[]> {
-    return this.http.get<ToDoList[]>(this.apiUrl);
-  }
+ getToDos(): Observable<ToDoList[]> {
+  return this.http.get<ToDoList[]>(this.apiUrl).pipe(
+    map((todos, index) =>
+      todos.map((todo, i) => ({
+        ...todo,
+        id: todo.id ?? i + 1
+      }))
+    )
+  );
+}
+
 
   /** GET single todo by id */
-  getToDo(id: number): Observable<ToDoList> {
+  getToDo(id: string): Observable<ToDoList> {
     return this.http.get<ToDoList>(`${this.apiUrl}/${id}`);
   }
 
@@ -33,7 +41,7 @@ export class ToDoService {
   }
 
   /** DELETE a todo by id */
-  deleteToDo(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  deleteToDo(id: string|number): Observable<ToDoList> {
+    return this.http.delete<ToDoList>(`${this.apiUrl}/${id}`);
   }
 }

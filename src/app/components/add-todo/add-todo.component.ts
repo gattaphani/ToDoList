@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { ToDoListStore } from '../../store/ToDoListStore';
 import { ToDoList } from '../../Modal/ToDoListModal';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-todo',
@@ -17,29 +18,51 @@ export class AddTodoComponent implements OnInit {
 
   todoForm: FormGroup;
   isEditMode: boolean = false;
-  editingId: any;
+  editingId: string  = ''; // if 0 means "not set"
+  todolistStore = inject(ToDoListStore);
 
   // Observables
   error$ = this.todolistStore.error$;
   loading$ = this.todolistStore.loading$;
   todolist$ = this.todolistStore.todo$;
+  router = inject(Router);
+  activatedRoute = inject(ActivatedRoute);
 
-  constructor(private fb: FormBuilder, private todolistStore: ToDoListStore) {
+  constructor(private fb: FormBuilder) {
     this.todoForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      date: [''], // optional
+      date: [''], // optional,
+      id: [''], // optional,
       status: ['', Validators.required]
     });
+    this.todolistStore.loadToDoList();
   }
 
   ngOnInit(): void {
-    this.loadToDos();
+    this.activatedRoute.params.subscribe(params => {
+      if (params['id']) {
+        console.log('Editing todo with ID:', params['id']);
+        this.isEditMode = true;
+        this.editingId = params['id'];
+        this.todolist$.subscribe(todos => {
+          console.log('Current todos:', todos);
+          const todo = todos.find(t => t.id && t.id === this.editingId);
+          console.log('Found todo:', todo);
+          if (todo) {
+            this.todoForm.patchValue(todo);
+          }
+        });
+      } else {
+        this.isEditMode = false;
+      }
+    });
+
   }
 
-  loadToDos(): void {
-    this.todolistStore.loadToDoList();
-  }
+  // loadToDos(): void {
+  //   this.todolistStore.loadToDoList();
+  // }
 
   onSubmit(): void {
     if (this.todoForm.invalid) {
@@ -49,33 +72,23 @@ export class AddTodoComponent implements OnInit {
 
     const todo: ToDoList = {
       ...this.todoForm.value,
-      id: this.editingId ?? Date.now() // Use backend ID in real app
+      id: this.editingId ?? ''  // Use backend ID in real app
     };
 
     if (this.isEditMode) {
       this.todolistStore.updateToDo(todo);
+      this.router.navigate(['/list-todo', this.editingId]);
     } else {
       this.todolistStore.addToDo(todo);
+      this.router.navigate(['/list-todo']);
     }
 
     this.resetForm();
   }
 
-  editToDo(todo: ToDoList): void {
-    this.isEditMode = true;
-    this.editingId = todo.id;
-    this.todoForm.patchValue(todo);
-  }
-
-  deleteToDo(todo: ToDoList): void {
-    if (todo.id != null) {
-      this.todolistStore.deleteToDo(todo.id);
-    }
-  }
-
   resetForm(): void {
     this.todoForm.reset();
     this.isEditMode = false;
-    this.editingId = null;
+    this.editingId = '';
   }
 }
