@@ -14,14 +14,15 @@ export class ToDoService {
 
   /** GET all todos */
  getToDos(): Observable<ToDoList[]> {
-  return this.http.get<ToDoList[]>(this.apiUrl).pipe(
-    map((todos, index) =>
-      todos.map((todo, i) => ({
-        ...todo,
-        id: todo.id ?? i + 1
-      }))
-    )
-  );
+  return this.http.get<ToDoList[]>(this.apiUrl)
+  // .pipe(
+  //   map((todos, index) =>
+  //     todos.map((todo, i) => ({
+  //       ...todo,
+  //       id: todo.id ?? i + 1
+  //     }))
+  //   )
+  // );
 }
 
 
@@ -32,6 +33,7 @@ export class ToDoService {
 
   /** CREATE a new todo */
   addToDo(todo: ToDoList): Observable<ToDoList> {
+    console.log('Adding todo:', todo);
     return this.http.post<ToDoList>(this.apiUrl, todo);
   }
 

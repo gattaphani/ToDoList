@@ -24,18 +24,21 @@ export class ListTodoComponent {
     ngOnInit(): void {
         console.log('ListTodoComponent initialized');
         this.todolistStore.loadToDoList();
+        // this.todolist$.subscribe(todos => {
+        //     console.log('Current todos:', todos);
+        // });
     }
 
 
     deleteToDo(todo: ToDoList): void {
-        console.log('Deleting todo with ID:', todo.id);
-        if (todo.id != null) {
+        console.log('Deleting todo with ID:', todo, todo.id);
+        if (todo.id) {
             this.todolistStore.deleteToDo(todo.id);
         }
     }
     editToDo(todo: ToDoList): void {
         console.log('Editing todo with ID:', todo.id);
-        if (todo.id != null) {
+        if (todo.id) {
             this.router.navigate(['/add-todo', todo.id]);
         }
     }

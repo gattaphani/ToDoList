@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, ReactiveFormsModule, Validators, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { ToDoListStore } from '../../store/ToDoListStore';
@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-add-todo',
   standalone: true,
-  imports: [IonicModule, CommonModule, ReactiveFormsModule],
+  imports: [IonicModule, CommonModule, ReactiveFormsModule, FormsModule],
   providers: [ToDoListStore],
   templateUrl: './add-todo.component.html',
   styleUrls: ['./add-todo.component.scss']
@@ -18,7 +18,7 @@ export class AddTodoComponent implements OnInit {
 
   todoForm: FormGroup;
   isEditMode: boolean = false;
-  editingId: string  = ''; // if 0 means "not set"
+  editingId: string | number = ''; // if 0 means "not set"
   todolistStore = inject(ToDoListStore);
 
   // Observables
@@ -33,7 +33,7 @@ export class AddTodoComponent implements OnInit {
       title: ['', Validators.required],
       description: ['', Validators.required],
       date: [''], // optional,
-      id: [''], // optional,
+      id: [''], // optional, backend will assign
       status: ['', Validators.required]
     });
     this.todolistStore.loadToDoList();
@@ -45,13 +45,22 @@ export class AddTodoComponent implements OnInit {
         console.log('Editing todo with ID:', params['id']);
         this.isEditMode = true;
         this.editingId = params['id'];
+        console.log('Editing ID set to:', typeof this.editingId);
         this.todolist$.subscribe(todos => {
           console.log('Current todos:', todos);
           const todo = todos.find(t => t.id && t.id === this.editingId);
-          console.log('Found todo:', todo);
-          if (todo) {
-            this.todoForm.patchValue(todo);
+          console.log('Found todo:', todo, this.editingId);
+          if (todo?.id) {
+            this.todoForm.patchValue({
+              title: todo.title,
+              description: todo.description,
+              date: todo.date,
+              status: todo.status,
+              id: todo.id  // Ensure ID is set in form value
+            });
+            // this.todoForm.value.id = todo.id; // Ensure ID is set in form value
           }
+          console.log('Form patched with todo:', this.todoForm.value);
         });
       } else {
         this.isEditMode = false;
@@ -69,26 +78,42 @@ export class AddTodoComponent implements OnInit {
       this.todoForm.markAllAsTouched();
       return;
     }
+    const todoData = this.todoForm.getRawValue();
 
-    const todo: ToDoList = {
-      ...this.todoForm.value,
-      id: this.editingId ?? ''  // Use backend ID in real app
-    };
+    if (this.isEditMode && this.editingId != null) {
+      // UPDATE → attach id
+      const updatedTodo = { ...todoData, id: this.editingId };
+      this.todolistStore.updateToDo(updatedTodo);
+       this.router.navigate(['/list-todo', this.editingId]);
+    } {
+    // CREATE → remove id if it exists (defensive coding)
+    const { id, ...newTodo } = todoData as any;  // destructure id out
+    this.todolistStore.addToDo(newTodo);
+    this.router.navigate(['/list-todo']);
+  }
+  
 
-    if (this.isEditMode) {
-      this.todolistStore.updateToDo(todo);
-      this.router.navigate(['/list-todo', this.editingId]);
-    } else {
-      this.todolistStore.addToDo(todo);
-      this.router.navigate(['/list-todo']);
-    }
+    // const todo: ToDoList = {
+    //   ...this.todoForm.value,
+    //   id: this.editingId ?? ''  // Use backend ID in real app
+    // };
+    
+
+    // if (this.isEditMode) {
+    //   this.todolistStore.updateToDo(todo);
+    //   this.router.navigate(['/list-todo', this.editingId]);
+    // } else {
+    //   this.todolistStore.addToDo(todo);
+    //   this.router.navigate(['/list-todo']);
+    // }
 
     this.resetForm();
   }
 
+
   resetForm(): void {
     this.todoForm.reset();
     this.isEditMode = false;
-    this.editingId = '';
+    // this.editingId = '';
   }
 }

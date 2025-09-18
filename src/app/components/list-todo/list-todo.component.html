@@ -19,16 +19,16 @@
 </ng-template>
 
   
-<ion-list *ngIf="todolist$ | async as todos">
+<ion-list *ngIf="todolist$ | async as todos" ngSkipHydration>
   <ion-item *ngFor="let todo of todos">
     <ion-label>
-      <h2>{{ todo.title }}</h2>
-      <p>{{ todo.description }}</p>
-      <p>{{ todo.id }}</p>
-      <p>{{ todo.date }}</p>
-      <p>{{ todo.status }}</p>
+      <h2><strong>Title:</strong> <span>{{ todo.title }}</span></h2>
+      <p><strong>Description:</strong> <span>{{ todo.description }}</span></p>
+      <p><strong>ID:</strong> <span>{{ todo.id }}</span></p>
+      <p><strong>Date:</strong> <span>{{ todo.date }}</span></p>
+      <p><strong>Status:</strong> <span>{{ todo.status }}</span></p>
     </ion-label>
-    <ion-button (click)="editToDo(todo)" fill="outline" size="small">Edit</ion-button>
-    <ion-button (click)="deleteToDo(todo)" fill="clear" color="danger" size="small">Delete</ion-button>
+    <ion-button (click)="editToDo(todo)" fill="outline" color="primary" size="small">Edit</ion-button>
+    <ion-button (click)="deleteToDo(todo)" fill="outline" color="danger" size="small">Delete</ion-button>
   </ion-item>
 </ion-list>

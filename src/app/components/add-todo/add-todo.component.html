@@ -8,6 +8,11 @@
     <ion-label position="floating">Description</ion-label>
     <ion-input formControlName="description"></ion-input>
   </ion-item>
+  
+  <ion-item *ngIf="isEditMode">
+    <ion-label position="floating">ID</ion-label>
+    <ion-input [readonly]="isEditMode" type="text" formControlName="id"></ion-input>
+  </ion-item>
 
    <ion-item>
     <ion-label position="floating">Date</ion-label>
