@@ -58,7 +58,6 @@ export class AddTodoComponent implements OnInit {
               status: todo.status,
               id: todo.id  // Ensure ID is set in form value
             });
-            // this.todoForm.value.id = todo.id; // Ensure ID is set in form value
           }
           console.log('Form patched with todo:', this.todoForm.value);
         });
@@ -69,9 +68,6 @@ export class AddTodoComponent implements OnInit {
 
   }
 
-  // loadToDos(): void {
-  //   this.todolistStore.loadToDoList();
-  // }
 
   onSubmit(): void {
     if (this.todoForm.invalid) {
@@ -79,33 +75,19 @@ export class AddTodoComponent implements OnInit {
       return;
     }
     const todoData = this.todoForm.getRawValue();
+    console.log('Form submitted with data:', todoData);
 
     if (this.isEditMode && this.editingId != null) {
       // UPDATE → attach id
       const updatedTodo = { ...todoData, id: this.editingId };
       this.todolistStore.updateToDo(updatedTodo);
-       this.router.navigate(['/list-todo', this.editingId]);
-    } {
-    // CREATE → remove id if it exists (defensive coding)
-    const { id, ...newTodo } = todoData as any;  // destructure id out
-    this.todolistStore.addToDo(newTodo);
-    this.router.navigate(['/list-todo']);
-  }
-  
-
-    // const todo: ToDoList = {
-    //   ...this.todoForm.value,
-    //   id: this.editingId ?? ''  // Use backend ID in real app
-    // };
-    
-
-    // if (this.isEditMode) {
-    //   this.todolistStore.updateToDo(todo);
-    //   this.router.navigate(['/list-todo', this.editingId]);
-    // } else {
-    //   this.todolistStore.addToDo(todo);
-    //   this.router.navigate(['/list-todo']);
-    // }
+      this.router.navigate(['/list-todo', this.editingId]);
+    } else {
+      // CREATE → remove id if it exists (defensive coding)
+      const { id, ...newTodo } = todoData;  // destructure id out
+      this.todolistStore.addToDo(newTodo);
+      this.router.navigate(['/list-todo']);
+    }
 
     this.resetForm();
   }
