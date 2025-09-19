@@ -1,0 +1,26 @@
+form {
+  max-width: 500px;       // restricts width so form stays centered
+  margin: 40px auto;      // centers form horizontally with spacing from top/bottom
+  padding: 20px;          // inner spacing
+  background: #fcfcfc;    // light background
+  border-radius: 12px;    // rounded corners
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); // subtle shadow
+
+  ion-input,
+  ion-select {
+    margin-bottom: 10px;  // spacing between fields
+    --padding-start: 12px;
+    --padding-end: 12px;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+    border-radius: 8px;
+  }
+
+  ion-button {
+    display: block;
+    margin: 20px auto 0 auto; // centers button
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+  }
+}
