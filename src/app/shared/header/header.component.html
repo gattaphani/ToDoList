@@ -6,6 +6,7 @@
     <div class="header-links">
         <a [routerLink]="['/add-todo']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true}">Add</a>
         <a [routerLink]="['/list-todo']" routerLinkActive="active">List</a>
+        <a [routerLink]="['/counter']" routerLinkActive="active">Counter</a>
         <div class="header-date">
         <p>{{ currentDate | date : "medium" }}</p>
         </div>

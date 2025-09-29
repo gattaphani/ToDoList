@@ -1,4 +1,4 @@
-<ng-container *ngIf="loading$ | async">
+<ng-container *ngIf="loading$ | async" else listTpl>
   <ion-list>
     <ion-item *ngFor="let i of [1,2,3]">
       <ion-label>

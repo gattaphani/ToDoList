@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, ReactiveFormsModule, Validators, FormsModule } 
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { ToDoListStore } from '../../store/ToDoListStore';
-import { ToDoList } from '../../Modal/ToDoListModal';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

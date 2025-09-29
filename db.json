@@ -1,25 +1,18 @@
 {
   "posts": [
     {
-      "title": "phaneendra",
-      "description": "venkat",
-      "date": "2025-09-17",
-      "id": "1ed2",
+      "id": "62cf",
+      "title": "Phaneendra",
+      "description": "Venkat",
+      "date": "2025-09-20",
       "status": "pending"
     },
     {
-      "id": "2a38",
-      "title": "venkat",
-      "description": "venkat",
-      "date": "2025-09-17",
-      "status": "pending"
-    },
-    {
-      "title": "Phaneendra Venkat",
-      "description": "Employee",
-      "date": "2025-09-19",
-      "id": "a611",
-      "status": "pending"
+      "id": "d42d",
+      "title": "Phaneendra",
+      "description": "Gatta",
+      "date": "2025-09-29",
+      "status": "in-progress"
     }
   ],
   "comments": [

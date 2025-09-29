@@ -1,0 +1,41 @@
+ion-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center; // horizontally center
+  justify-content: center;
+  gap: 8px;
+  height: auto;
+  padding: 20px;
+  width: 60%;
+  margin: auto;
+
+  ion-card-header {
+    ion-card-title,
+    ion-card-subtitle {
+      text-align: center;
+    }
+  }
+  ion-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: inherit;
+    .button-group {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 2px;
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap:8px;
+      width: 100%;
+      ion-input {
+        border: 2px solid;
+      } 
+    }
+  }
+}

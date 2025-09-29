@@ -1,15 +1,19 @@
 <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
   
+
     <ion-input label="Title" label-placement="floating"  formControlName="title"
    fill="solid" placeholder="Enter text"></ion-input>
- 
+
     <ion-input label="Description" label-placement="floating" formControlName="description"
    fill="solid" placeholder="Enter text"></ion-input>
-  
+
+
+
     <ion-input *ngIf="isEditMode" label-placement="floating" label="ID" [readonly]="isEditMode" type="text" formControlName="id" fill="solid" placeholder="Enter text"></ion-input>
 
     <ion-input label="Date" type="date" label-placement="floating" formControlName="date" fill="solid" placeholder="Enter Date"></ion-input>
- 
+
+
 
 
     <ion-select aria-label="Status" label-placement="floating" fill="solid" label="Status" interface="popover" placeholder="Select status" formControlName="status">
@@ -17,12 +21,14 @@
       <ion-select-option value="done">Done</ion-select-option>
       <ion-select-option value="in-progress">In Progress</ion-select-option>
     </ion-select>
+    
 
 
 
   <ion-button type="submit">
     {{ isEditMode ? 'Update' : 'Add' }} ToDo
   </ion-button>
+  
 </form>
 
 

@@ -1,14 +1,14 @@
 form {
-  max-width: 500px;       // restricts width so form stays centered
-  margin: 40px auto;      // centers form horizontally with spacing from top/bottom
-  padding: 20px;          // inner spacing
-  background: #fcfcfc;    // light background
-  border-radius: 12px;    // rounded corners
+  max-width: 500px; // restricts width so form stays centered
+  margin: 40px auto; // centers form horizontally with spacing from top/bottom
+  padding: 20px; // inner spacing
+  background: #fcfcfc; // light background
+  border-radius: 12px; // rounded corners
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); // subtle shadow
 
   ion-input,
   ion-select {
-    margin-bottom: 10px;  // spacing between fields
+    margin-bottom: 10px; // spacing between fields
     --padding-start: 12px;
     --padding-end: 12px;
     --padding-top: 10px;
