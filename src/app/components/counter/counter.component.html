@@ -4,7 +4,7 @@
     <ion-card-subtitle>Counter Subtitle</ion-card-subtitle>
   </ion-card-header>
 
-  <ion-card-content>
+  <ion-card-content ngSkipHydration>
     <h2>Counter : {{ counter}}</h2>
     <div class="button-group">
       <ion-button (click)="onIncrement()">Increment</ion-button>
