@@ -5,11 +5,11 @@
   </ion-card-header>
 
   <ion-card-content>
-    <h2>{{ counter }}</h2>
+    <h2>Counter : {{ counter}}</h2>
     <div class="button-group">
-      <ion-button>Increment</ion-button>
-      <ion-button>Decrement</ion-button>
-      <ion-button>Reset</ion-button>
+      <ion-button (click)="onIncrement()">Increment</ion-button>
+      <ion-button (click)="onDecrement()">Decrement</ion-button>
+      <ion-button (click)="onReset()">Reset</ion-button>
     </div>
     <div class="input-group">
       <ion-input type="text"></ion-input>
