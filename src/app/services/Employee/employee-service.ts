@@ -7,39 +7,34 @@ import { Observable } from 'rxjs/internal/Observable';
   providedIn: 'root'
 })
 export class EmployeeService {
-  
-  constructor(private http: HttpClient) {}
+
+  constructor(private http: HttpClient) { }
 
   private readonly apiUrl = 'http://localhost:5000/employees';
 
   /** GET all employees */
- getAllEmployee(): Observable<Employee[]> {
-  return this.http.get<Employee[]>(this.apiUrl)
-}
-
-  /** GET todos by userId */
-  getToDosByUserId(userId: string): Observable<Employee[]> {
-    return this.http.get<Employee[]>(`${this.apiUrl}?userId=${userId}`);
+  getAllEmployee(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(this.apiUrl);
   }
-  
-  /** GET single todo by id */
-  getToDo(id: string): Observable<Employee> {
+
+  /** GET single employee by id */
+  getEmployeeById(id: string): Observable<Employee> {
     return this.http.get<Employee>(`${this.apiUrl}/${id}`);
   }
 
-  /** CREATE a new todo */
-  addToDo(todo: Employee): Observable<Employee> {
-    console.log('Adding todo:', todo);
-    return this.http.post<Employee>(this.apiUrl, todo);
+  /** CREATE a new employee */
+  addEmployee(employee: Employee): Observable<Employee> {
+    console.log('Adding employee:', employee);
+    return this.http.post<Employee>(this.apiUrl, employee);
   }
 
-  /** UPDATE an existing todo (full replace) */
-  updateToDo(todo: Employee): Observable<Employee> {
-    return this.http.put<Employee>(`${this.apiUrl}/${todo.id}`, todo);
+  /** UPDATE an existing employee (full replace) */
+  updateEmployee(employee: Employee): Observable<Employee> {
+    return this.http.put<Employee>(`${this.apiUrl}/${employee.id}`, employee);
   }
 
-  /** DELETE a todo by id */
-  deleteToDo(id: string|number): Observable<Employee> {
-    return this.http.delete<Employee  >(`${this.apiUrl}/${id}`);
+  /** DELETE a employee by id */
+  deleteEmployee(id: string | number): Observable<Employee> {
+    return this.http.delete<Employee>(`${this.apiUrl}/${id}`);
   }
 }
