@@ -1,34 +1,51 @@
-<ng-container *ngIf="loading$ | async" else listTpl>
+@if (loading$ | async) {
   <ion-list>
-    <ion-item *ngFor="let i of [1,2,3]">
-      <ion-label>
-        <h2><ion-skeleton-text animated style="width: 60%"></ion-skeleton-text></h2>
-        <p><ion-skeleton-text animated style="width: 80%"></ion-skeleton-text></p>
-      </ion-label>
-    </ion-item>
+    @for (i of [1,2,3]; track $index) {
+      <ion-item>
+        <ion-label>
+          <h2>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          </h2>
+          <p>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </p>
+        </ion-label>
+      </ion-item>
+    }
   </ion-list>
-</ng-container>
-
-
-<ng-template #listTpl>
-  <ng-container *ngIf="(error$ | async) as error">
+} @else {
+  @if (error$ | async; as error) {
     <ion-text color="danger">
       <p>Error: {{ error }}</p>
     </ion-text>
-  </ng-container>
-</ng-template>
+  } @else {
+    @if (todolist$ | async; as todos) {
+      <ion-list ngSkipHydration>
+        @for (todo of todos; track todo.id) {
+          <ion-item>
+            <ion-label>
+              <h2><strong>Title:</strong> <span>{{ todo.title }}</span></h2>
+              <p><strong>Description:</strong> <span>{{ todo.description }}</span></p>
+              <p><strong>ID:</strong> <span>{{ todo.id }}</span></p>
+              <p><strong>Date:</strong> <span>{{ todo.date }}</span></p>
+              <p><strong>Status:</strong> <span>{{ todo.status }}</span></p>
+            </ion-label>
 
-  
-<ion-list *ngIf="todolist$ | async as todos" ngSkipHydration>
-  <ion-item *ngFor="let todo of todos">
-    <ion-label>
-      <h2><strong>Title:</strong> <span>{{ todo.title }}</span></h2>
-      <p><strong>Description:</strong> <span>{{ todo.description }}</span></p>
-      <p><strong>ID:</strong> <span>{{ todo.id }}</span></p>
-      <p><strong>Date:</strong> <span>{{ todo.date }}</span></p>
-      <p><strong>Status:</strong> <span>{{ todo.status }}</span></p>
-    </ion-label>
-    <ion-button (click)="editToDo(todo)" fill="outline" color="primary" size="small">Edit</ion-button>
-    <ion-button (click)="deleteToDo(todo)" fill="outline" color="danger" size="small">Delete</ion-button>
-  </ion-item>
-</ion-list>
+            <ion-button (click)="editToDo(todo)" fill="outline" color="primary" size="small">
+              Edit
+            </ion-button>
+            <ion-button (click)="deleteToDo(todo)" fill="outline" color="danger" size="small">
+              Delete
+            </ion-button>
+          </ion-item>
+        } @empty {
+          <ion-item>
+            <ion-label class="ion-text-center">
+              <p>No records found</p>
+            </ion-label>
+          </ion-item>
+        }
+      </ion-list>
+    }
+  }
+}

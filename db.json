@@ -1,17 +1,10 @@
 {
   "posts": [
     {
-      "id": "62cf",
-      "title": "Phaneendra",
-      "description": "Venkat",
-      "date": "2025-09-20",
-      "status": "pending"
-    },
-    {
-      "id": "d42d",
+      "id": "2b54",
       "title": "Phaneendra",
       "description": "Gatta",
-      "date": "2025-09-29",
+      "date": "2025-10-01",
       "status": "in-progress"
     }
   ],

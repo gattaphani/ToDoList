@@ -2,8 +2,9 @@ import { Injectable, inject } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { ToDoList } from '../Modal/ToDoListModal';
 import { exhaustMap, Observable, of } from 'rxjs';
-import { ToDoService } from '../services/to-do.service';
+
 import { tapResponse } from '@ngrx/operators';
+import { ToDoService } from '../services/ToDo/to-do.service';
 
 export interface ToDoListState {
   todolist: ToDoList[];
