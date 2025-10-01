@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { CounterState } from './counter.state';
+import { CounterState } from '../Modal/counter.state';
 
 
 // "count" must match the key you used in provideStore({ count: counterReducer })

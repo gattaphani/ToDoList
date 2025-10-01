@@ -2,11 +2,10 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { Store } from '@ngrx/store';
-import { CounterState } from '../../Modal/counter.state';
-import { decrement, increment, reset } from '../../Modal/counter.actions';
 import { Observable, Subscription } from 'rxjs';
-import { log } from 'console';
-import { selectCounterValue } from '../../Modal/counter.selector';
+import { selectCounterValue } from '../../store/counter.selector';
+import { decrement, increment, reset } from '../../store/counter.actions';
+
 
 @Component({
   selector: 'app-counter',

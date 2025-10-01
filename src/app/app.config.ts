@@ -4,7 +4,8 @@ import { provideHttpClient, withFetch } from '@angular/common/http';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideStore } from '@ngrx/store';
-import { counterReducer } from './Modal/counter.reducers';
+import { counterReducer } from './store/counter.reducers';
+
 export const appConfig: ApplicationConfig = {
   providers:
     [
