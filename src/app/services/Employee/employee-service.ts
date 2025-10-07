@@ -10,11 +10,11 @@ export class EmployeeService {
 
   constructor(private http: HttpClient) { }
 
-  private readonly apiUrl = 'http://localhost:5000/employees';
+  private readonly apiUrl = 'http://localhost:5000/employees'; 
 
   /** GET all employees */
   getAllEmployee(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(this.apiUrl);
+    return this.http.get<Employee[]>(`${this.apiUrl}/get-emp`);
   }
 
   /** GET single employee by id */
