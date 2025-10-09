@@ -1,0 +1,31 @@
+<form [formGroup]="EmployeeForm" (ngSubmit)="onSubmit()">
+  
+
+    <ion-input label="Name" label-placement="floating"  formControlName="name"
+   fill="solid" placeholder="Enter text"></ion-input>
+
+    <ion-input label="Department" label-placement="floating" formControlName="department"
+   fill="solid" placeholder="Enter text"></ion-input>
+
+
+    <ion-input label="Position" label-placement="floating" formControlName="position"
+   fill="solid" placeholder="Enter text"></ion-input>
+    <ion-input *ngIf="isEditMode" label-placement="floating" label="ID" [readonly]="isEditMode" type="text" formControlName="_id" fill="solid" placeholder="Enter text"></ion-input>
+
+    <ion-input label="salary" type="text" label-placement="floating" formControlName="salary" fill="solid" placeholder="Enter Date"></ion-input>
+
+
+
+
+  
+    
+
+
+
+  <ion-button type="submit">
+    {{ isEditMode ? 'Update' : 'Add' }} Employee
+  </ion-button>
+  
+</form>
+
+

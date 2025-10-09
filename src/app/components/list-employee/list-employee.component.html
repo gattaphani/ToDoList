@@ -1,4 +1,5 @@
-@if (loading) {
+
+@if (loading$  | async) {
   <ion-list ngSkipHydration>
     @for (i of [1,2,3]; track $index) {
       <ion-item>
@@ -14,14 +15,14 @@
     }
   </ion-list>
 } @else {
-  @if (error) {
+  @if (error$ | async; as error) {
     <ion-text color="danger">
       <p>Error: {{ error }}</p>
     </ion-text>
   } @else {
-    @if (employeedata) {
+    @if (employeeList$ | async; as todos) {
       <ion-list>
-        @for (todo of employeedata; track todo._id) {
+        @for (todo of todos; track todo._id) {
           <ion-item>
             <ion-label>
               <h2><strong>Name:</strong> <span>{{ todo.name }}</span></h2>
@@ -31,12 +32,12 @@
               <p><strong>Id:</strong> <span>{{ todo._id }}</span></p>
             </ion-label>
 
-            <!-- <ion-button (click)="updateEmployee(todo)" fill="outline" color="primary" size="small">
+            <ion-button (click)="updateEmployee(todo)" fill="outline" color="primary" size="small">
               Edit
-            </ion-button> -->
-            <!-- <ion-button (click)="deleteEmployee(todo)" fill="outline" color="danger" size="small">
+            </ion-button>
+            <ion-button (click)="deleteEmployee(todo._id)" fill="outline" color="danger" size="small">
               Delete
-            </ion-button> -->
+            </ion-button>
           </ion-item>
         } @empty {
           <ion-item>

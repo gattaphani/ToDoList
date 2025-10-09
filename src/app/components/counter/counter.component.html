@@ -4,16 +4,16 @@
     <ion-card-subtitle>Counter Subtitle</ion-card-subtitle>
   </ion-card-header>
 
-  <ion-card-content ngSkipHydration>
+  <ion-card-content>
     <h2>Counter : {{ counter}}</h2>
     <div class="button-group">
       <ion-button (click)="onIncrement()">Increment</ion-button>
       <ion-button (click)="onDecrement()">Decrement</ion-button>
       <ion-button (click)="onReset()">Reset</ion-button>
     </div>
-    <!-- <div class="input-group">
-      <ion-input type="text"></ion-input>
-      <ion-button>Add</ion-button>
-    </div> -->
+    <div class="input-group">
+      <ion-input type="text" [(ngModel)]="inputValue"></ion-input>
+      <ion-button (click)="onAddValue(inputValue)">Add</ion-button>
+    </div>
   </ion-card-content>
 </ion-card>

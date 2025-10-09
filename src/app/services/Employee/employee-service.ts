@@ -25,16 +25,16 @@ export class EmployeeService {
   /** CREATE a new employee */
   addEmployee(employee: Employee): Observable<Employee> {
     console.log('Adding employee:', employee);
-    return this.http.post<Employee>(this.apiUrl, employee);
+    return this.http.post<Employee>(`${this.apiUrl}/add-emp`, employee);
   }
 
   /** UPDATE an existing employee (full replace) */
   updateEmployee(employee: Employee): Observable<Employee> {
-    return this.http.put<Employee>(`${this.apiUrl}/${employee.id}`, employee);
+    return this.http.put<Employee>(`${this.apiUrl}/update-emp/${employee._id}`, employee);
   }
 
   /** DELETE a employee by id */
   deleteEmployee(id: string | number): Observable<Employee> {
-    return this.http.delete<Employee>(`${this.apiUrl}/${id}`);
+    return this.http.delete<Employee>(`${this.apiUrl}/delete-emp/${id}`);
   }
 }

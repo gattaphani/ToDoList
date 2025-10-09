@@ -7,6 +7,10 @@ export const selectCounterState =
   createFeatureSelector<CounterState>('count');
 
 export const selectCounterValue = createSelector(
-  selectCounterState,
-  (state) => state.count
+  selectCounterState, (state) => state.count
 );
+
+// export const selectCounterValue = createSelector(
+//   selectCounterState,
+//   (state) => state
+// );

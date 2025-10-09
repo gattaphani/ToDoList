@@ -64,7 +64,6 @@ export class AddTodoComponent implements OnInit {
         this.isEditMode = false;
       }
     });
-
   }
 
 
@@ -87,7 +86,6 @@ export class AddTodoComponent implements OnInit {
       this.todolistStore.addToDo(newTodo);
       this.router.navigate(['/list-todo']);
     }
-
     this.resetForm();
   }
 
