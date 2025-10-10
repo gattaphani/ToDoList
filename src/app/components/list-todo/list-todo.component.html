@@ -16,7 +16,8 @@
 } @else {
   @if (error$ | async; as error) {
     <ion-text color="danger">
-      <p>Error: {{ error }}</p>
+      <p>Error: {{ error | json  }}</p>
+      <p>Please run json-server --watch db.json or npm run server</p>
     </ion-text>
   } @else {
     @if (todolist$ | async; as todos) {

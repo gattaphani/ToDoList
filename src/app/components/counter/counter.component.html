@@ -11,8 +11,11 @@
       <ion-button (click)="onDecrement()">Decrement</ion-button>
       <ion-button (click)="onReset()">Reset</ion-button>
     </div>
+    <hr />
+    
     <div class="input-group">
-      <ion-input type="text" [(ngModel)]="inputValue"></ion-input>
+      <ion-button class="input-label" (click)="onToggleInput()">{{showInput ? '-' : '+'}}</ion-button>
+      <ion-input type="text" [(ngModel)]="inputValue" *ngIf="showInput"></ion-input>
       <ion-button (click)="onAddValue(inputValue)">Add</ion-button>
     </div>
   </ion-card-content>
