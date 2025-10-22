@@ -74,7 +74,7 @@ export class ListEmployeeComponent {
       this.employeeStore.addEmployee(formData);
       this.EmployeeForm.reset();
       // Handle form submission, e.g., send data to a service
-    } else if (this.isEditMode) {
+    } else if (this.editingId) {
       const formData = this.EmployeeForm.value;
       console.log('Updating Employee:', formData);
       this.employeeStore.updateEmployee(formData);

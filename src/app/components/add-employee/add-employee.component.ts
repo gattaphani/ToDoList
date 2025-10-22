@@ -83,7 +83,7 @@ export class AddEmployeeComponent {
   // }
 
   onSubmit() {
-    if (this.EmployeeForm.valid) {
+    if (this.editingId && !this.isEditMode) {
       const formData = this.EmployeeForm.value;
       console.log('Form Data:', formData);
       this.employeeStore.addEmployee(formData);

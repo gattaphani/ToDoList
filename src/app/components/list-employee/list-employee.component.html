@@ -21,7 +21,7 @@
     </ion-text>
   } @else {
     @if (employeeList$ | async; as todos) {
-      <ion-list>
+      <ion-list ngSkipHydration>
         @for (todo of todos; track todo._id) {
           <ion-item>
             <ion-label>
