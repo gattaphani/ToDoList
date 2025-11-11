@@ -19,5 +19,24 @@
       "postId": 2,
       "content": "This is a comment on the second post."
     }
+  ],
+  
+  "courses": [
+    {
+      "courseName": "Angular Basics",
+      "instructor": "John Doe",
+      "duration": 40,
+      "rating": 4,
+      "description": "Learn Angular step by step.",
+      "url": "https://ionicframework.com/docs/img/demos/card-media.png"
+    },
+    {
+      "courseName": "React Fundamentals",
+      "instructor": "Jane Smith",
+      "duration": 35,
+      "rating": 5,
+      "description": "Master the fundamentals of React.",
+      "url": "https://ionicframework.com/docs/img/demos/card-media.png"
+    }
   ]
 }

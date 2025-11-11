@@ -1,3 +1,18 @@
-<p>list-courses works!</p>
-<!-- <ion-button (click)="getCourses()">Get Courses</ion-button> -->
-<p>{{ courses$ | async | json}}</p>
+<ion-button (click)="onOpen()">Add Course</ion-button>
+<ion-modal [isOpen]="isModalOpen$ | async">
+  <ng-template>
+    <app-modal></app-modal>
+  </ng-template>
+</ion-modal>
+
+
+<ion-card *ngFor="let c of courses$ | async">
+  <ion-card-content>
+    <img alt="no image" src="{{ c.url }}" width="300" height="150" />
+    <h2>{{ c.courseName }}</h2>
+    <p>Instructor: {{ c.instructor }}</p>
+    <p>Duration: {{ c.duration }} hours</p>
+    <p>Rating: {{ c.rating }} stars</p>
+    <p>Description: {{ c.description }}</p>
+  </ion-card-content>
+</ion-card>
