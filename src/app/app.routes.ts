@@ -37,6 +37,10 @@ export const routes: Routes = [
         path: 'list-employee',
         loadComponent: () => import('../app/components/list-employee/list-employee.component').then((m) => m.ListEmployeeComponent),
     },
+     {
+        path: 'list-courses',
+        loadComponent: () => import('../app/components/list-courses/list-courses.component').then((m) => m.ListCoursesComponent),
+    },
     {
         path: '', redirectTo: 'add-todo', pathMatch: 'full'
     },

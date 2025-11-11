@@ -4,11 +4,16 @@ import { EmployeeStore } from '../../store/EmployeeStore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
+import { selectIsModalOpen } from '../../store/modal.selector';
+import { Store } from '@ngrx/store';
+import { ModalComponent } from "../modal/modal.component";
+import { openModal } from '../../store/modal.actions';
+// import { getCourses } from '../../store/courses.actions';
 
 @Component({
   selector: 'app-add-employee',
   standalone: true,
-  imports: [CommonModule, IonicModule, FormsModule,ReactiveFormsModule],
+  imports: [CommonModule, IonicModule, FormsModule, ReactiveFormsModule, ModalComponent],
   templateUrl: './add-employee.component.html',
   styleUrl: './add-employee.component.scss',
   providers: [EmployeeStore]
@@ -21,7 +26,9 @@ export class AddEmployeeComponent {
   isEditMode: boolean = false;
   EmployeeForm!: FormGroup;
   editingId: string | number = ''; // if 0 means "not set"
-  constructor() {
+   isModalOpen$ = this.store.select(selectIsModalOpen);
+  //  constructor(private store: Store) {}
+  constructor(private store: Store) {
     this.EmployeeForm = this.formBuilder.group({
       _id: [''],
       name: [''],
@@ -65,6 +72,7 @@ export class AddEmployeeComponent {
         });
       }
     });
+    // this.store.dispatch(getCourses({ courseId: this.editingId ?? 'default-id' }));
   }
 
   // getEmployeeById(id: string) {
@@ -98,6 +106,11 @@ export class AddEmployeeComponent {
     } else {
       console.log('Form is invalid');
     }
+  }
+
+  onOpen() {
+    this.store.dispatch(openModal());
+    console.log('Open modal dispatched', this.store.select(selectIsModalOpen), this.isModalOpen$);
   }
 
 }

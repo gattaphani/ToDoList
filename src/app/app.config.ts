@@ -6,6 +6,8 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { provideStore } from '@ngrx/store';
 import { counterReducer } from './store/counter.reducers';
 import { employeeInterceptor } from '../app/Interceptors/Employee.Interceptor';
+import { modalReducer } from './store/modal.reducer';
+import { coursesReducer } from './store/courses.reducers';
 
 export const appConfig: ApplicationConfig = {
   providers:
@@ -16,7 +18,7 @@ export const appConfig: ApplicationConfig = {
     ),
       provideRouter(routes),
       provideClientHydration(),
-      provideStore({ count: counterReducer })
+      provideStore({ count: counterReducer, modal: modalReducer, course: coursesReducer })
     ]
 };
 

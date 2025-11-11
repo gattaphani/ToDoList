@@ -10,3 +10,5 @@ export const addValue = createAction('Add Value', props<{ value: number }>());
 console.log('Add Value action created', addValue);
 export const toggle = createAction('Toggle', props<{ toggleValue: boolean }>());
 console.log('Toggle action created', toggle);
+// export const getCourses = createAction('Get Courses', props<{ courseId: string | number }>());
+// console.log('Get Courses action created', getCourses);

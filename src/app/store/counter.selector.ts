@@ -8,7 +8,7 @@ export const selectCounterState =
   // export const toggleState =
   // createFeatureSelector<CounterState>('toggle');
 
-export const counterSelector = createSelector(
+export const counterSelector = createSelector( 
   selectCounterState, (state) => state.count
 );
 console.log('Selector counterSelector created', counterSelector);
@@ -17,4 +17,9 @@ export const toggleSelector = createSelector(
   selectCounterState, (state) => state.toggle
 );
 console.log('Selector toggleSelector created', toggleSelector);
+
+// export const courseSelector = createSelector(
+//   selectCounterState, (state) => state
+// );  
+// console.log('Selector courseSelector created', courseSelector);
 
