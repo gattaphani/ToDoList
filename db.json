@@ -20,7 +20,6 @@
       "content": "This is a comment on the second post."
     }
   ],
-  
   "courses": [
     {
       "courseName": "Angular Basics",
@@ -28,7 +27,8 @@
       "duration": 40,
       "rating": 4,
       "description": "Learn Angular step by step.",
-      "url": "https://ionicframework.com/docs/img/demos/card-media.png"
+      "url": "https://ionicframework.com/docs/img/demos/card-media.png",
+      "id": "d961"
     },
     {
       "courseName": "React Fundamentals",
@@ -36,7 +36,36 @@
       "duration": 35,
       "rating": 5,
       "description": "Master the fundamentals of React.",
-      "url": "https://ionicframework.com/docs/img/demos/card-media.png"
+      "url": "https://ionicframework.com/docs/img/demos/card-media.png",
+      "id": "8d30"
+    },
+    {
+      "id": "",
+      "courseName": "",
+      "instructor": "",
+      "duration": 1,
+      "rating": 1,
+      "description": "",
+      "url": "https://placehold.co/"
+    },
+    {
+      "id": "",
+      "courseName": "",
+      "instructor": "",
+      "duration": 1,
+      "rating": 1,
+      "description": "",
+      "url": ""
+    },
+    {
+      "id": "",
+      "courseName": "",
+      "instructor": "",
+      "duration": 1,
+      "rating": 1,
+      "description": "",
+      "url": "",
+      "undefined": ""
     }
   ]
 }

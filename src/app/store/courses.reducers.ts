@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { getCourses, loadCourses, loadCoursesSuccess } from "./courses.actions";
+import { addCourse, addCourseSuccess, deleteCourse, deleteCourseSuccess, getCourses, loadCourses, loadCoursesSuccess, updateCourse, updateCourseSuccess } from "./courses.actions";
 import { CourseState } from "../Modal/courseModal";
 
 
@@ -25,5 +25,35 @@ export const coursesReducer = createReducer(
   on(loadCoursesSuccess, (state, { courses }) => {
     console.log('Reducer loadCoursesSuccess called:', courses);
     return [...courses];
+  }),
+
+  on(addCourse, (state, { course }) => {
+    console.log('Reducer addCourse called:', course);
+    return [...state, course];
+  }),
+  on(addCourseSuccess, (state, { course }) => {
+    console.log('Reducer addCourseSuccess called:', course);
+    return [...state, course];
+  }),
+
+    on(updateCourse, (state, { course }) => {
+    console.log('Reducer addCourse called:', course);
+    return [...state, course];
+  }),
+  on(updateCourseSuccess, (state, { course }) => {
+    console.log('Reducer addCourseSuccess called:', course);
+    return [...state, course];
+  }),
+  
+    on(deleteCourse, (state, { id }) => {
+    console.log('Reducer addCourse called:', id);
+     if (id == null) return state;
+    return state.filter(c => c.id !== id);
+  }),
+  on(deleteCourseSuccess, (state, { id }) => {
+    console.log('Reducer addCourseSuccess called:', id);
+     if (id == null) return state;
+    return state.filter(c => c.id !== id);
   })
+  
 );

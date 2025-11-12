@@ -8,7 +8,7 @@ import { counterReducer } from './store/counter.reducers';
 import { employeeInterceptor } from '../app/Interceptors/Employee.Interceptor';
 import { modalReducer } from './store/modal.reducer';
 import { coursesReducer } from './store/courses.reducers';
-import { loadCoursesEffect } from './store/courses.effect';
+import { addCourseEffect, deleteCourseEffect, loadCoursesEffect, updateCourseEffect } from './store/courses.effect';
 import { provideEffects } from '@ngrx/effects';
 
 export const appConfig: ApplicationConfig = {
@@ -21,7 +21,7 @@ export const appConfig: ApplicationConfig = {
       provideRouter(routes),
       provideClientHydration(),
       provideStore({ count: counterReducer, modal: modalReducer, course: coursesReducer }),
-      provideEffects({ loadCoursesEffect })
+      provideEffects({ loadCoursesEffect,addCourseEffect,updateCourseEffect,deleteCourseEffect })
     ]
 };
 

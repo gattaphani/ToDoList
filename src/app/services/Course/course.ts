@@ -32,10 +32,12 @@ export class CourseService {
     return this.http.post<CourseState>(this.apiUrl, course);
   }
 
-  /** UPDATE an existing course (full replace) */
-  // updateCourse(course: CourseState): Observable<CourseState> {
-  //   return this.http.put<CourseState>(`${this.apiUrl}/${course.id}`, course);
-  // }
+
+   /** UPDATE an existing course (full replace) */
+   updateCourse(course: CourseState): Observable<CourseState> {
+    console.log(course.id)
+     return this.http.put<CourseState>(`${this.apiUrl}/${course.id}`, course);
+   }
 
   /** DELETE a course by id */
   deleteCourse(id: string|number): Observable<CourseState> {

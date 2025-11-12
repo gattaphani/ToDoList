@@ -14,11 +14,13 @@
 
 <ion-card *ngFor="let c of courses$ | async">
   <ion-card-content>
-    <img alt="no image" src="{{ c.url }}" width="300" height="150" />
-    <h2>{{ c.courseName }}</h2>
-    <p>Instructor: {{ c.instructor }}</p>
-    <p>Duration: {{ c.duration }} hours</p>
-    <p>Rating: {{ c.rating }} stars</p>
-    <p>Description: {{ c.description }}</p>
+    <img alt="no image" src="{{ c?.url }}" width="300" height="150" />
+    <h2>{{ c?.courseName }}</h2>
+    <p>Instructor: {{ c?.instructor }}</p>
+    <p>Duration: {{ c?.duration }} hours</p>
+    <p>Rating: {{ c?.rating }} stars</p>
+    <p>Description: {{ c?.description }}</p>
+    <button (click)="onEdit(c)">Edit</button>&nbsp;
+    <button (click)="onDelete(c)">Delete</button>
   </ion-card-content>
 </ion-card>

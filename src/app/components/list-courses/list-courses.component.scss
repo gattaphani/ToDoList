@@ -8,7 +8,9 @@ app-modal {
   justify-content: center;
   align-items: center;
 //   background: rgba(0,0,0,0.4); /* backdrop */
-  z-index: 9999;               /* on top of everything */
+  z-index: 9999;   
+  height: 100%;
+  overflow: auto;            /* on top of everything */
 }
 .modal-content {
   background: white;

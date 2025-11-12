@@ -8,6 +8,7 @@
       position: relative;
       z-index: 99999;
       border: 2px solid;
+      overflow: auto;
     }
     .modal {
     //   background: #fff;
@@ -15,6 +16,7 @@
       border-radius: 8px;
       width: 300px;
     //   text-align: center;
+    
     }
     button {
       margin-top: 20px;

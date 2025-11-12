@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { CourseService } from '../services/Course/course';
-import { loadCourses, loadCoursesSuccess } from './courses.actions';
+import { addCourse, addCourseSuccess, deleteCourse, deleteCourseSuccess, loadCourses, loadCoursesSuccess, updateCourse, updateCourseSuccess } from './courses.actions';
 import { catchError, map, mergeMap, of } from 'rxjs';
 
 export const loadCoursesEffect = createEffect(
@@ -14,6 +14,48 @@ export const loadCoursesEffect = createEffect(
       mergeMap(() => 
         courseService.getCourses().pipe(
           map(courses => loadCoursesSuccess({ courses })))
+      )
+    );
+  },
+  { functional: true }
+);
+
+export const addCourseEffect = createEffect(
+  (actions$ = inject(Actions), service = inject(CourseService)) => {
+    return actions$.pipe(
+      ofType(addCourse),
+      mergeMap(({ course }) =>
+        service.addCourse(course).pipe(
+          map(newCourse => addCourseSuccess({ course: newCourse }))
+        )
+      )
+    );
+  },
+  { functional: true }
+);
+
+export const updateCourseEffect = createEffect(
+  (actions$ = inject(Actions), service = inject(CourseService)) => {
+    return actions$.pipe(
+      ofType(updateCourse),
+      mergeMap(({ course }) =>
+        service.updateCourse(course).pipe(
+          map(newCourse => updateCourseSuccess({ course: newCourse }))
+        )
+      )
+    );
+  },
+  { functional: true }
+);
+
+export const deleteCourseEffect = createEffect(
+  (actions$ = inject(Actions), service = inject(CourseService)) => {
+    return actions$.pipe(
+      ofType(deleteCourse),
+      mergeMap(({ id }) =>
+        service.deleteCourse(id!).pipe(
+          map(newCourse => deleteCourseSuccess({id}))
+        )
       )
     );
   },
