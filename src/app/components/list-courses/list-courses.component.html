@@ -1,7 +1,13 @@
 <ion-button (click)="onOpen()">Add Course</ion-button>
 <ion-modal [isOpen]="isModalOpen$ | async">
   <ng-template>
-    <app-modal></app-modal>
+    <app-modal>
+      <app-reusable-form 
+         [form]="courseForm"
+        [fields]="fields"
+        (submitForm)="submitCourseForm($event)"
+      ></app-reusable-form>
+    </app-modal>
   </ng-template>
 </ion-modal>
 

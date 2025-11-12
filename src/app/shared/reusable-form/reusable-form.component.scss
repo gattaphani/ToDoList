@@ -1,0 +1,14 @@
+.field-wrapper {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.input-box {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+.error {
+  color: red;
+  font-size: 13px;
+}

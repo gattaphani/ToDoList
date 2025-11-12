@@ -1,0 +1,13 @@
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <ion-item *ngFor="let field of fields">
+    <ion-label position="floating">{{ field.label }}</ion-label>
+    <ion-input
+      [type]="field.type || 'text'"
+      [formControlName]="field.name"
+      [placeholder]="field.placeholder"
+    >
+    </ion-input>
+  </ion-item>
+  <ion-button type="submit">Submit</ion-button>
+</form>
