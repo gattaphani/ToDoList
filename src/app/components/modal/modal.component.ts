@@ -13,6 +13,7 @@ import { IonicModule } from '@ionic/angular';
 })
 export class ModalComponent {
   @Input() data: any;
+  @Input() isModalOpen: boolean = false;
   @Output() editFormData = new EventEmitter<any>();
  constructor(private store: Store) {}
 

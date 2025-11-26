@@ -24,7 +24,7 @@ export class ListCoursesComponent {
   selectedCourse: CourseState  | null = null;
   isModalOpen$: Observable<any> = this.store.select(selectIsModalOpen);
   @Output() editForm = new EventEmitter<CourseState | null>();
-  isModalOpen = false;
+  // isModalOpen = false;
   constructor(private store: Store, private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -45,9 +45,9 @@ export class ListCoursesComponent {
     // this.store.dispatch(openModal());
     
   }
- setOpen(isOpen: boolean) {
-    this.isModalOpen = isOpen;
-  }
+//  setOpen(isOpen: boolean) {
+//     this.isModalOpen = isOpen;
+//   }
 
 
 //   +  // open modal optionally for editing a specific course
