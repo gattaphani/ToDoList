@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output, SimpleChanges } from '@angular/core';
 import { addCourse, deleteCourse, getCourses, loadCourses, loadCoursesSuccess, updateCourse } from '../../store/courses.actions';
 import { Store } from '@ngrx/store';
-import { map, Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { courseSelector } from '../../store/courses.selector';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
@@ -20,23 +20,43 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrl: './list-courses.component.scss'
 })
 export class ListCoursesComponent {
-  courses$: Observable<CourseState[]> = this.store.select(courseSelector)
-  // selectedCourse: CourseState | null = null;
-  isModalOpen$ = this.store.select(selectIsModalOpen);
+  courses$: Observable<CourseState[]>  = this.store.select(courseSelector);
+  selectedCourse: CourseState  | null = null;
+  isModalOpen$: Observable<any> = this.store.select(selectIsModalOpen);
+  @Output() editForm = new EventEmitter<CourseState | null>();
+  isModalOpen = false;
   constructor(private store: Store, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.store.dispatch(loadCourses());
-
   }
   onOpen() {
+    this.selectedCourse = null;
+    // this.selectedCourse = course ?? null;
     this.store.dispatch(openModal());
-    console.log('Open modal dispatched'), 
-    // this.store.select(selectIsModalOpen),
+    console.log('Open modal dispatched'); 
+    // // this.store.select(selectIsModalOpen),
     this.isModalOpen$.subscribe(val => {
       console.log('Modal open state:', val);
+      // this.editForm.emit(this.selectedCourse); // now allowed to be CourseState | null
     });
+    //  this.selectedCourse = null;
+    // this.store.dispatch(selectCourse({ course: null }));
+    // this.store.dispatch(openModal());
+    
   }
+ setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+  }
+
+
+//   +  // open modal optionally for editing a specific course
+// +  onOpen(course?: CourseState) {
+// +    this.selectedCourse = course ?? null;
+// +    this.store.dispatch(openModal());
+// +    console.log('Open modal dispatched');
+// +    this.editForm.emit(this.selectedCourse); // now allowed to be CourseState | null
+// +  }
 
 
   fields: DynamicField[] = [
@@ -59,26 +79,43 @@ export class ListCoursesComponent {
     id: [''] // optional, backend will assign
   });
 
-  submitCourseForm(formValue: any) {
-    // this.selectedCourse = null;
-    console.log(formValue);
-    this.store.dispatch(addCourse({ course: formValue }));
-    this.store.dispatch(closeModal());
+  editCourseForm(formValue: any) {
+    // this.selectedCourse = formValue;
+    // console.log('Form Value Submitted:', formValue);
+    // console.log(formValue);
+    // this.store.dispatch(addCourse({ course: formValue }));
+    // this.store.dispatch(closeModal());
     // this.closeModal();
+     if (formValue.id) {
+    this.store.dispatch(updateCourse({ course: formValue }));
+  } else {
+    this.store.dispatch(addCourse({ course: formValue }));
+  }
+  this.store.dispatch(closeModal());
   }
 
+
+    ngOnChanges(changes: SimpleChanges) {
+    if (this.selectedCourse) {
+      // Prepopulate form fields
+      console.log('Patching form with selectedCourse:',changes, this.selectedCourse);
+      this.courseForm.patchValue(this.selectedCourse);
+    }
+  }
   onEdit(course:CourseState){
-    // this.selectedCourse = course;
-    this.onOpen();
-    this.store.dispatch(updateCourse({course}))
+   
+  
+    this.selectedCourse = course;
+    //  this.onOpen();
+     this.store.dispatch(openModal());
+   
+  //    this.store.dispatch(updateCourse({
+  //   course: { ...course, id: course.id != null ? String(course.id) : course.id }
+  // }));
   }
 
   onDelete(course: CourseState){
     this.store.dispatch(deleteCourse({id: course.id}))
   }
 
-  // openModal() { this.showModal = true; }
-  // closeModal() { 
-  //   this.showModal = false; 
-  // }
 }

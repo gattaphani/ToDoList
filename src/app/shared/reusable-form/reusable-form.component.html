@@ -1,13 +1,16 @@
 
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="form">
   <ion-item *ngFor="let field of fields">
     <ion-label position="floating">{{ field.label }}</ion-label>
     <ion-input
       [type]="field.type || 'text'"
-      [formControlName]="field.name"
+      [formControlName]="field.control"
       [placeholder]="field.placeholder"
     >
     </ion-input>
   </ion-item>
-  <ion-button type="submit">Submit</ion-button>
+  <!-- <ion-button type="submit">Submit</ion-button> -->
+    <ion-button type="submit">
+    {{ form.value.id ? 'Update' : 'Submit' }}
+  </ion-button>
 </form>

@@ -1,26 +1,35 @@
 <ion-button (click)="onOpen()">Add Course</ion-button>
-<ion-modal [isOpen]="isModalOpen$ | async">
+<ion-modal [isOpen]="isModalOpen$ | async" ngSkipHydration>
   <ng-template>
-    <app-modal>
-      <app-reusable-form 
-         [form]="courseForm"
+
+       <ion-buttons slot="end">
+            <ion-button (click)="setOpen(false)">Close</ion-button>
+          </ion-buttons>
+    <app-modal [data]="selectedCourse" (editFormData)="editCourseForm($event)">
+      <app-reusable-form
+        [form]="courseForm"
         [fields]="fields"
-        (submitForm)="submitCourseForm($event)"
+        [data]="selectedCourse"
+        (editFormDataChange)="editCourseForm($event)"
       ></app-reusable-form>
     </app-modal>
   </ng-template>
 </ion-modal>
 
-
-<ion-card *ngFor="let c of courses$ | async">
-  <ion-card-content>
-    <img alt="no image" src="{{ c?.url }}" width="300" height="150" />
-    <h2>{{ c?.courseName }}</h2>
-    <p>Instructor: {{ c?.instructor }}</p>
-    <p>Duration: {{ c?.duration }} hours</p>
-    <p>Rating: {{ c?.rating }} stars</p>
-    <p>Description: {{ c?.description }}</p>
-    <button (click)="onEdit(c)">Edit</button>&nbsp;
-    <button (click)="onDelete(c)">Delete</button>
-  </ion-card-content>
-</ion-card>
+<ng-container *ngIf="courses$ | async as courses" ngSkipHydration>
+  <ng-container *ngFor="let c of courses ?? []" ngSkipHydration>
+  <ion-card>
+    <ion-card-content>
+      <img alt="no image" [src]=" c?.url " width="300" height="150" />
+      <h2>Course Title: {{ c?.courseName }}</h2>
+      <!-- <p>Course Id: {{ c?.id }}</p> -->
+      <p>Instructor: {{ c?.instructor }}</p>
+      <p>Duration: {{ c?.duration }} hours</p>
+      <p>Rating: {{ c?.rating }} stars</p>
+      <p>Description: {{ c?.description }}</p>
+      <button (click)="onEdit(c)">Edit</button>&nbsp;
+      <button (click)="onDelete(c)">Delete</button>
+    </ion-card-content>
+  </ion-card>
+</ng-container>
+</ng-container>

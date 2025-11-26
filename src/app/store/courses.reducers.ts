@@ -22,10 +22,15 @@ export const coursesReducer = createReducer(
     console.log('Reducer loadCourses called:', state);
     return [...state];
   }),
-  on(loadCoursesSuccess, (state, { courses }) => {
-    console.log('Reducer loadCoursesSuccess called:', courses);
-    return [...courses];
-  }),
+  // on(loadCoursesSuccess, (state, { courses }) => {
+  //   console.log('Reducer loadCoursesSuccess called:', courses);
+  //   return [...courses];
+  // }),
+
+  on(loadCoursesSuccess, (state, { courses }) => 
+    {
+      return [...courses]
+    }),
 
   on(addCourse, (state, { course }) => {
     console.log('Reducer addCourse called:', course);
@@ -37,11 +42,11 @@ export const coursesReducer = createReducer(
   }),
 
     on(updateCourse, (state, { course }) => {
-    console.log('Reducer addCourse called:', course);
+    console.log('Reducer updateCourse called:', course);
     return [...state, course];
   }),
   on(updateCourseSuccess, (state, { course }) => {
-    console.log('Reducer addCourseSuccess called:', course);
+    console.log('Reducer updateCourseSuccess called:', course);
     return [...state, course];
   }),
   

@@ -12,7 +12,7 @@ export const loadCoursesEffect = createEffect(
     return actions$.pipe(
       ofType(loadCourses),
       mergeMap(() => 
-        courseService.getCourses().pipe(
+        courseService.getCoursesService().pipe(
           map(courses => loadCoursesSuccess({ courses })))
       )
     );
@@ -25,7 +25,7 @@ export const addCourseEffect = createEffect(
     return actions$.pipe(
       ofType(addCourse),
       mergeMap(({ course }) =>
-        service.addCourse(course).pipe(
+        service.addCourseService(course).pipe(
           map(newCourse => addCourseSuccess({ course: newCourse }))
         )
       )
@@ -39,7 +39,7 @@ export const updateCourseEffect = createEffect(
     return actions$.pipe(
       ofType(updateCourse),
       mergeMap(({ course }) =>
-        service.updateCourse(course).pipe(
+        service.updateCourseService(course).pipe(
           map(newCourse => updateCourseSuccess({ course: newCourse }))
         )
       )
@@ -53,7 +53,7 @@ export const deleteCourseEffect = createEffect(
     return actions$.pipe(
       ofType(deleteCourse),
       mergeMap(({ id }) =>
-        service.deleteCourse(id!).pipe(
+        service.deleteCourseService(id!).pipe(
           map(newCourse => deleteCourseSuccess({id}))
         )
       )

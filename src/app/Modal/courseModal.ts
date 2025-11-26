@@ -5,7 +5,7 @@ export interface CourseState {
   rating: number;
   description: string;
   url: string;
-  id?: string| number
+  id?: string;
 }
 export const initialCourseState: CourseState []= [];
 
@@ -15,6 +15,7 @@ export const initialCourse: CourseState = {
   duration: 0,
   rating: 0,
   description: '',
-  url: ''
+  url: '',
+  id: ''
 };
 

@@ -46,16 +46,8 @@
       "duration": 1,
       "rating": 1,
       "description": "",
-      "url": "https://placehold.co/"
-    },
-    {
-      "id": "",
-      "courseName": "",
-      "instructor": "",
-      "duration": 1,
-      "rating": 1,
-      "description": "",
-      "url": ""
+      "url": "",
+      "undefined": ""
     },
     {
       "id": "",
@@ -66,6 +58,72 @@
       "description": "",
       "url": "",
       "undefined": ""
+    },
+    {
+      "id": "",
+      "courseName": "",
+      "instructor": "",
+      "duration": 1,
+      "rating": 1,
+      "description": "",
+      "url": "",
+      "undefined": ""
+    },
+    {
+      "id": "",
+      "courseName": "",
+      "instructor": "",
+      "duration": 1,
+      "rating": 1,
+      "description": "",
+      "url": "",
+      "undefined": "na"
+    },
+    {
+      "id": "d961",
+      "courseName": "Angular Basics",
+      "instructor": "John Doe",
+      "duration": 40,
+      "rating": 4,
+      "description": "Learn Angular step by step.",
+      "url": "https://ionicframework.com/docs/img/demos/card-media.png",
+      "undefined": ""
+    },
+    {
+      "id": "d961",
+      "courseName": "Angular Basics",
+      "instructor": "John Doe",
+      "duration": 40,
+      "rating": 4,
+      "description": "Learn Angular step by step.",
+      "url": "https://ionicframework.com/docs/img/demos/card-media.png"
+    },
+    {
+      "id": "d961",
+      "courseName": "Angular Basics",
+      "instructor": "John Doe",
+      "duration": 40,
+      "rating": 4,
+      "description": "Learn Angular step by step.",
+      "url": "https://ionicframework.com/docs/img/demos/card-media.png"
+    },
+    {
+      "id": "d961",
+      "courseName": "Angular Basics",
+      "instructor": "John Doe",
+      "duration": 40,
+      "rating": 4,
+      "description": "Learn Angular step by step.",
+      "url": "https://ionicframework.com/docs/img/demos/card-media.png"
+    },
+    {
+      "id": "d961",
+      "courseName": "Angular Basics",
+      "instructor": "John Doe",
+      "duration": 40,
+      "rating": 4,
+      "description": "Learn Angular step by step.",
+      "url": "https://ionicframework.com/docs/img/demos/card-media.png"
     }
   ]
 }

@@ -12,7 +12,7 @@ export class CourseService {
   constructor(private http: HttpClient) {}
 
   /** GET all courses */
-  getCourses(): Observable<CourseState[]> {
+  getCoursesService(): Observable<CourseState[]> {
     return this.http.get<CourseState[]>(this.apiUrl);
   }
 
@@ -22,25 +22,26 @@ export class CourseService {
   }
 
   /** GET single course by id */
-  getCourse(id: string): Observable<CourseState> {
+  getCourseService(id: string): Observable<CourseState> {
     return this.http.get<CourseState>(`${this.apiUrl}/${id}`);
   }
 
   /** CREATE a new course */
-  addCourse(course: CourseState): Observable<CourseState> {
+  addCourseService(course: CourseState): Observable<CourseState> {
     console.log('Adding course:', course);
     return this.http.post<CourseState>(this.apiUrl, course);
   }
 
 
    /** UPDATE an existing course (full replace) */
-   updateCourse(course: CourseState): Observable<CourseState> {
-    console.log(course.id)
-     return this.http.put<CourseState>(`${this.apiUrl}/${course.id}`, course);
+   updateCourseService(course: CourseState): Observable<CourseState> {
+    console.log('Updating course with id:', course);
+    console.log(course);
+     return this.http.put<CourseState>(`${this.apiUrl}/${course?.id}`, course);
    }
 
   /** DELETE a course by id */
-  deleteCourse(id: string|number): Observable<CourseState> {
+  deleteCourseService(id: string|number): Observable<CourseState> {
     return this.http.delete<CourseState>(`${this.apiUrl}/${id}`);
   }
 }
