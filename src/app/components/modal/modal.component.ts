@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { closeModal } from '../../store/modal.actions';
+import { IonicModule } from '@ionic/angular';
 // import { ReusableFormComponent } from '../../shared/reusable-form/reusable-form.component';
 
 @Component({
   selector: 'app-modal',
-  imports: [],
+  imports: [IonicModule],
   standalone: true,
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss'

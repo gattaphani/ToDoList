@@ -1,10 +1,6 @@
 <ion-button (click)="onOpen()">Add Course</ion-button>
 <ion-modal [isOpen]="isModalOpen$ | async" ngSkipHydration>
   <ng-template>
-
-       <ion-buttons slot="end">
-            <ion-button (click)="setOpen(false)">Close</ion-button>
-          </ion-buttons>
     <app-modal [data]="selectedCourse" (editFormData)="editCourseForm($event)">
       <app-reusable-form
         [form]="courseForm"

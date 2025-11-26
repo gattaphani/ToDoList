@@ -9,13 +9,12 @@ app-modal {
   align-items: center;
 //   background: rgba(0,0,0,0.4); /* backdrop */
   z-index: 9999;   
-  height: 100%;
   overflow: auto;            /* on top of everything */
 }
 .modal-content {
   background: white;
   padding: 20px;
   border-radius: 12px;
-  width: 90%;
-  max-width: 400px;
+  // width: 90%;
+  // max-width: 400px;
 }
