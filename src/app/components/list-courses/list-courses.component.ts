@@ -1,16 +1,17 @@
 import { Component, EventEmitter, Output, SimpleChanges } from '@angular/core';
-import { addCourse, deleteCourse, getCourses, loadCourses, loadCoursesSuccess, updateCourse } from '../../store/courses.actions';
+import { addCourse, deleteCourse, getCourses, loadCourses, loadCoursesSuccess, showModalAction, updateCourse } from '../../store/courses.actions';
 import { Store } from '@ngrx/store';
 import { map, Observable, of } from 'rxjs';
-import { courseSelector } from '../../store/courses.selector';
+import { courseSelector, showModalSelector } from '../../store/courses.selector';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { CourseState } from '../../Modal/courseModal';
+import { Course } from '../../Modal/courseModal';
 import { selectIsModalOpen } from '../../store/modal.selector';
 import { ModalComponent } from "../modal/modal.component";
 import { closeModal, openModal } from '../../store/modal.actions';
 import { DynamicField, ReusableFormComponent } from '../../shared/reusable-form/reusable-form.component';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AppState } from '../../store/app.state';
 
 @Component({
   selector: 'app-list-courses',
@@ -20,53 +21,38 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrl: './list-courses.component.scss'
 })
 export class ListCoursesComponent {
-  courses$: Observable<CourseState[]>  = this.store.select(courseSelector);
-  selectedCourse: CourseState  | null = null;
-  isModalOpen$: Observable<any> = this.store.select(selectIsModalOpen);
-  @Output() editForm = new EventEmitter<CourseState | null>();
-  // isModalOpen = false;
-  constructor(private store: Store, private fb: FormBuilder) { }
+  courses$: Observable<Course[]>  | null = null;
+  showModal$: Observable<boolean> | null = null;
+  selectedCourse: Course  | null = null;
+  
+  @Output() editForm = new EventEmitter<Course | null>();
+  constructor(private store: Store<AppState>, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.store.dispatch(loadCourses());
-  }
+    this.courses$ = this.store.select(courseSelector);
+    this.showModal$ = this.store.select(showModalSelector);
+    }
+  
   onOpen() {
     this.selectedCourse = null;
-    // this.selectedCourse = course ?? null;
-    this.store.dispatch(openModal());
-    console.log('Open modal dispatched'); 
-    // // this.store.select(selectIsModalOpen),
-    this.isModalOpen$.subscribe(val => {
-      console.log('Modal open state:', val);
-      // this.editForm.emit(this.selectedCourse); // now allowed to be CourseState | null
-    });
-    //  this.selectedCourse = null;
-    // this.store.dispatch(selectCourse({ course: null }));
-    // this.store.dispatch(openModal());
+     this.store.dispatch(showModalAction({ value: true }));
+      this.store.select(showModalSelector).subscribe(val => {
+        console.log('Modal open state:', val);
+      });
     
   }
-//  setOpen(isOpen: boolean) {
-//     this.isModalOpen = isOpen;
-//   }
 
-
-//   +  // open modal optionally for editing a specific course
-// +  onOpen(course?: CourseState) {
-// +    this.selectedCourse = course ?? null;
-// +    this.store.dispatch(openModal());
-// +    console.log('Open modal dispatched');
-// +    this.editForm.emit(this.selectedCourse); // now allowed to be CourseState | null
-// +  }
 
 
   fields: DynamicField[] = [
-    { control: 'courseName', label: 'Course Name', errorMessage: 'Required' },
-    { control: 'instructor', label: 'Instructor', errorMessage: 'Required' },
-    { control: 'duration', type: 'number', label: 'Duration (hrs)' },
-    { control: 'rating', type: 'number', label: 'Rating' },
-    { control: 'description', label: 'Description' },
-    { control: 'url', label: 'Image URL' },
-    { control: 'id', label: 'Id'}
+    { control: 'courseName', type: 'text', label: 'Course Name', placeholder: 'Enter course name', errorMessage: 'Required' },
+    { control: 'instructor', type: 'text', label: 'Instructor', placeholder: 'Enter instructor name', errorMessage: 'Required' },
+    { control: 'duration', type: 'number', label: 'Duration (hrs)', placeholder: 'Enter duration in hours' },
+    { control: 'rating', type: 'number', label: 'Rating', placeholder: 'Enter rating' },
+    { control: 'description', type: 'textarea', label: 'Description', placeholder: 'Enter description'},
+    { control: 'url', type: 'text', label: 'Image URL', placeholder: 'Enter image URL' },
+    { control: 'id', type: 'text', label: 'Id'}
   ];
 
   courseForm = this.fb.group({
@@ -80,12 +66,6 @@ export class ListCoursesComponent {
   });
 
   editCourseForm(formValue: any) {
-    // this.selectedCourse = formValue;
-    // console.log('Form Value Submitted:', formValue);
-    // console.log(formValue);
-    // this.store.dispatch(addCourse({ course: formValue }));
-    // this.store.dispatch(closeModal());
-    // this.closeModal();
      if (formValue.id) {
     this.store.dispatch(updateCourse({ course: formValue }));
   } else {
@@ -102,20 +82,23 @@ export class ListCoursesComponent {
       this.courseForm.patchValue(this.selectedCourse);
     }
   }
-  onEdit(course:CourseState){
-   
-  
+  onEdit(course:Course){
     this.selectedCourse = course;
-    //  this.onOpen();
-     this.store.dispatch(openModal());
-   
-  //    this.store.dispatch(updateCourse({
-  //   course: { ...course, id: course.id != null ? String(course.id) : course.id }
-  // }));
+    this.store.dispatch(showModalAction({ value: true }));
+    this.store.select(showModalSelector).subscribe(val => {
+      console.log('Modal open state:', val);
+    });
   }
 
-  onDelete(course: CourseState){
+  onDelete(course: Course){
     this.store.dispatch(deleteCourse({id: course.id}))
   }
-
+submitForm(formValue: any) {
+    if (formValue.id) {
+    this.store.dispatch(updateCourse({ course: formValue }));
+  } else {
+    this.store.dispatch(addCourse({ course: formValue }));
+  }
+  this.store.dispatch(showModalAction({ value: false }));
+}
 }

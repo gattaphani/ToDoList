@@ -2,6 +2,9 @@
 <div class="overlay">
   <div class="modal">
     <ng-content></ng-content>
-    <ion-button (click)="onClose()">Close</ion-button>
+    <!-- <ion-button (click)="onClose()">Close</ion-button> -->
+   
   </div>
+  
 </div>
+ <div class="close-button" (click)="onClose()">&times;</div>

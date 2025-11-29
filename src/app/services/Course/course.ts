@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CourseState } from '../../Modal/courseModal';
+import { Course } from '../../Modal/courseModal';
 
 @Injectable({
   providedIn: 'root'
@@ -12,36 +12,36 @@ export class CourseService {
   constructor(private http: HttpClient) {}
 
   /** GET all courses */
-  getCoursesService(): Observable<CourseState[]> {
-    return this.http.get<CourseState[]>(this.apiUrl);
+  getCoursesService(): Observable<Course[]> {
+    return this.http.get<Course[]>(this.apiUrl);
   }
 
   /** GET courses by userId */
-  getCoursesByUserId(userId: string): Observable<CourseState[]> {
-    return this.http.get<CourseState[]>(`${this.apiUrl}?userId=${userId}`);
+  getCoursesByUserId(userId: string): Observable<Course[]> {
+    return this.http.get<Course[]>(`${this.apiUrl}?userId=${userId}`);
   }
 
   /** GET single course by id */
-  getCourseService(id: string): Observable<CourseState> {
-    return this.http.get<CourseState>(`${this.apiUrl}/${id}`);
+  getCourseService(id: string): Observable<Course> {
+    return this.http.get<Course>(`${this.apiUrl}/${id}`);
   }
 
   /** CREATE a new course */
-  addCourseService(course: CourseState): Observable<CourseState> {
+  addCourseService(course: Course): Observable<Course> {
     console.log('Adding course:', course);
-    return this.http.post<CourseState>(this.apiUrl, course);
+    return this.http.post<Course>(this.apiUrl, course);
   }
 
 
    /** UPDATE an existing course (full replace) */
-   updateCourseService(course: CourseState): Observable<CourseState> {
+   updateCourseService(course: Course): Observable<Course> {
     console.log('Updating course with id:', course);
     console.log(course);
-     return this.http.put<CourseState>(`${this.apiUrl}/${course?.id}`, course);
+     return this.http.put<Course>(`${this.apiUrl}/${course?.id}`, course);
    }
 
   /** DELETE a course by id */
-  deleteCourseService(id: string|number): Observable<CourseState> {
-    return this.http.delete<CourseState>(`${this.apiUrl}/${id}`);
+  deleteCourseService(id: string|number): Observable<Course> {
+    return this.http.delete<Course>(`${this.apiUrl}/${id}`);
   }
 }

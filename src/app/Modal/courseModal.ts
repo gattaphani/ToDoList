@@ -1,4 +1,4 @@
-export interface CourseState {
+export interface Course {
   courseName: string;
   instructor: string;
   duration: number;
@@ -7,15 +7,5 @@ export interface CourseState {
   url: string;
   id?: string;
 }
-export const initialCourseState: CourseState []= [];
 
-export const initialCourse: CourseState = {
-  courseName: '',
-  instructor: '',
-  duration: 0,
-  rating: 0,
-  description: '',
-  url: '',
-  id: ''
-};
 

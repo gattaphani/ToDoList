@@ -1,8 +1,9 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { CourseService } from '../services/Course/course';
-import { addCourse, addCourseSuccess, deleteCourse, deleteCourseSuccess, loadCourses, loadCoursesSuccess, updateCourse, updateCourseSuccess } from './courses.actions';
-import { catchError, map, mergeMap, of } from 'rxjs';
+import { addCourse, addCourseSuccess, deleteCourse, deleteCourseSuccess, 
+loadCourses, loadCoursesSuccess, updateCourse, updateCourseSuccess } from './courses.actions';
+import { map, mergeMap } from 'rxjs';
 
 export const loadCoursesEffect = createEffect(
   (
