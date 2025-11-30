@@ -46,13 +46,13 @@ export class ListCoursesComponent {
 
 
   fields: DynamicField[] = [
-    { control: 'courseName', type: 'text', label: 'Course Name', placeholder: 'Enter course name', errorMessage: 'Required' },
-    { control: 'instructor', type: 'text', label: 'Instructor', placeholder: 'Enter instructor name', errorMessage: 'Required' },
-    { control: 'duration', type: 'number', label: 'Duration (hrs)', placeholder: 'Enter duration in hours' },
-    { control: 'rating', type: 'number', label: 'Rating', placeholder: 'Enter rating' },
-    { control: 'description', type: 'textarea', label: 'Description', placeholder: 'Enter description'},
-    { control: 'url', type: 'text', label: 'Image URL', placeholder: 'Enter image URL' },
-    { control: 'id', type: 'text', label: 'Id'}
+    { control: 'courseName', type: 'text', label: 'Course Name', placeholder: 'Enter course name', errorMessage: 'Required', readonly: false },
+    { control: 'instructor', type: 'text', label: 'Instructor', placeholder: 'Enter instructor name', errorMessage: 'Required', readonly: false },
+    { control: 'duration', type: 'number', label: 'Duration (hrs)', placeholder: 'Enter duration in hours', readonly: false },
+    { control: 'rating', type: 'number', label: 'Rating', placeholder: 'Enter rating', readonly: false },
+    { control: 'description', type: 'textarea', label: 'Description', placeholder: 'Enter description', readonly: false },
+    { control: 'url', type: 'text', label: 'Image URL', placeholder: 'Enter image URL', readonly: false },
+    { control: 'id', type: 'text', label: 'Id', readonly: true }
   ];
 
   courseForm = this.fb.group({

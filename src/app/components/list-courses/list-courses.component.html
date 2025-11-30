@@ -3,7 +3,6 @@
   {{showModal$ | async}}
   <ng-template>
     <app-modal [data]="selectedCourse" 
-    
     (editFormData)="editCourseForm($event)">
       <app-reusable-form
         [form]="courseForm"

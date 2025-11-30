@@ -14,10 +14,15 @@
   font-size: 13px;
 }
 
-// form {
-//   display: flex;
-//   flex-wrap: wrap;
-//   align-content: flex-start;
-//   align-items: center;
-//   justify-content: flex-start;
-// }
+form {
+  width: 400px;
+  height: 400px;
+}
+ion-label{
+  margin-left: 16px;
+}
+ion-item{
+  ion-input{
+    min-height: 0px !important;
+  }
+}

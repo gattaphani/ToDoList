@@ -14,6 +14,7 @@ export interface DynamicField {
   label: string;         // field label
   type?: string;   
   placeholder?: string;  // input placeholder
+  readonly?: boolean;   // is field readonly
   errorMessage?: string; // error text
 }
 

@@ -1,36 +1,34 @@
-
 <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="form">
-  <!-- <ion-item *ngFor="let field of fields"> -->
-    
-<ng-container *ngFor="let field of fields">
- <ion-label>{{ field.label }}</ion-label>
-  <!-- Text Input -->
-  <ion-item *ngIf="field.type !== 'textarea'">
-   
-    <ion-input
-      [type]="field.type || 'text'"
-      [placeholder]="field.placeholder"
-      [formControlName]="field.control">
-    </ion-input>
-  </ion-item>
+  <ng-container *ngFor="let field of fields">
+    <ng-container *ngIf="!(field.control === 'id' && !form.value.id)">
+      <ion-label>{{ field.label }} :</ion-label>
+      <!-- Text Input -->
+      <ion-list>
+        <ion-item *ngIf="field.type !== 'textarea'">
+          <ion-input
+            [type]="field.type || 'text'"
+            [placeholder]="field.placeholder"
+            [readonly]="field.readonly || false"
+            labelPlacement="stacked"
+            [formControlName]="field.control"
+          >
+          </ion-input>
+        </ion-item>
 
-  <!-- Textarea -->
-   
-  <ion-item *ngIf="field.type === 'textarea'">
-   
-    <ion-textarea
-      [formControlName]="field.control"
-      [placeholder]="field.placeholder"
-      auto-grow="true">
-    </ion-textarea>
-  </ion-item>
+        <!-- Textarea -->
+        <ion-item *ngIf="field.type === 'textarea'">
+          <ion-textarea
+            [formControlName]="field.control"
+            [placeholder]="field.placeholder"
+            auto-grow="true"
+          >
+          </ion-textarea>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+  </ng-container>
 
-</ng-container>
-
-
-  <!-- </ion-item> -->
-  <!-- <ion-button type="submit">Submit</ion-button> -->
-    <ion-button type="submit">
-    {{ form.value.id ? 'Update' : 'Submit' }}
+  <ion-button type="submit">
+    {{ form.value.id ? "Update" : "Submit" }}
   </ion-button>
 </form>
