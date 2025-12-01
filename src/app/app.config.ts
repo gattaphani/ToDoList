@@ -23,8 +23,7 @@ export const appConfig: ApplicationConfig = {
     ),
       provideRouter(routes),
       provideClientHydration(),
-      provideStore(AppReducer),
-      // provideState(coursesReducer),
+      provideStore( AppReducer),
       provideEffects({ loadCoursesEffect,addCourseEffect,updateCourseEffect,deleteCourseEffect })
     ]
 };

@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { addCourse, addCourseSuccess, deleteCourse, deleteCourseSuccess, getCourses,
-loadCourses, loadCoursesSuccess, showModalAction, updateCourse, 
+loadCourses, loadCoursesSuccess, setEditMode, showModalAction, updateCourse, 
 updateCourseSuccess } from "./courses.actions";
 import { CourseState, initialCourseState } from "./courses.state";
 
@@ -28,6 +28,11 @@ export const coursesReducer = createReducer<CourseState>(
       ...state,
       showModal: action.value
     };
+  }),
+
+  on(setEditMode, (state,  action) => {
+    console.log('Reducer setEditMode called:', action.isEditMode);
+    return {  ...state, isEditMode: action.isEditMode };
   }),
 
   on(loadCourses, (state) => {

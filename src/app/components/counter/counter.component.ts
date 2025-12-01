@@ -6,6 +6,7 @@ import { Observable, Subscription } from 'rxjs';
 import { counterSelector, toggleSelector } from '../../store/counter.selector';
 import { addValue, decrement, increment, reset, toggle } from '../../store/counter.actions';
 import { FormsModule } from '@angular/forms';
+import { AppState } from '../../store/app.state';
 
 
 @Component({
@@ -23,11 +24,13 @@ export class CounterComponent {
   toggleState: boolean = false;
   inputValue: number = 0;
   showInput: boolean = false;
-  private readonly store = inject(Store);
-  counter$: Observable<number> = this.store.select(counterSelector);
-  // select the toggle boolean from the store state directly (avoid selecting the action creator)
-  toggle$: Observable<boolean> = this.store.select(toggleSelector); // <-- use selector, not the action creator
+  private readonly store = inject(Store<AppState>);
+  counter$: Observable<number> | null= null;
+  toggle$: Observable<boolean> | null= null;
+ 
   ngOnInit() {
+     this.counter$ = this.store.select(counterSelector);
+     this.toggle$ = this.store.select(toggleSelector);
     this.counterSubscription$ = this.counter$.subscribe((count) => {
       this.counter = count;
       console.log('count:', count);
@@ -76,3 +79,4 @@ export class CounterComponent {
     }   
   } 
 }
+

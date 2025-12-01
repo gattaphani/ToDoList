@@ -4,9 +4,8 @@ import { CounterState } from '../Modal/counter.state';
 
 // "count" must match the key you used in provideStore({ count: counterReducer })
 export const selectCounterState =
-  createFeatureSelector<CounterState>('count');
-  // export const toggleState =
-  // createFeatureSelector<CounterState>('toggle');
+  createFeatureSelector<CounterState>('counter');
+ 
 
 export const counterSelector = createSelector( 
   selectCounterState, (state) => state.count
@@ -18,8 +17,5 @@ export const toggleSelector = createSelector(
 );
 console.log('Selector toggleSelector created', toggleSelector);
 
-// export const courseSelector = createSelector(
-//   selectCounterState, (state) => state
-// );  
-// console.log('Selector courseSelector created', courseSelector);
+
 

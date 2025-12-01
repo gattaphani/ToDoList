@@ -5,6 +5,8 @@ import { Course } from "../Modal/courseModal";
 export const showModalAction = createAction('Show Modal', props<{ value: boolean }>());
 // export const hideModalAction = createAction('Hide Modal', props<{ value: boolean }>());
 
+export const setEditMode = createAction('Set Edit Mode', props<{ isEditMode: boolean }>());
+
 export const getCourses = createAction('Get Courses');
 console.log('Get Courses action created', getCourses);
 

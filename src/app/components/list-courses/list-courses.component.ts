@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output, SimpleChanges } from '@angular/core';
 import { addCourse, deleteCourse, getCourses, loadCourses, loadCoursesSuccess, showModalAction, updateCourse } from '../../store/courses.actions';
 import { Store } from '@ngrx/store';
 import { map, Observable, of } from 'rxjs';
-import { courseSelector, showModalSelector } from '../../store/courses.selector';
+import { courseSelector, isEditModeSelector, showModalSelector } from '../../store/courses.selector';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { Course } from '../../Modal/courseModal';
@@ -24,6 +24,7 @@ export class ListCoursesComponent {
   courses$: Observable<Course[]>  | null = null;
   showModal$: Observable<boolean> | null = null;
   selectedCourse: Course  | null = null;
+  isEditMode$: Observable<boolean> | null = null;
   
   @Output() editForm = new EventEmitter<Course | null>();
   constructor(private store: Store<AppState>, private fb: FormBuilder) { }
@@ -32,6 +33,7 @@ export class ListCoursesComponent {
     this.store.dispatch(loadCourses());
     this.courses$ = this.store.select(courseSelector);
     this.showModal$ = this.store.select(showModalSelector);
+    this.isEditMode$ = this.store.select(isEditModeSelector);
     }
   
   onOpen() {
@@ -40,7 +42,6 @@ export class ListCoursesComponent {
       this.store.select(showModalSelector).subscribe(val => {
         console.log('Modal open state:', val);
       });
-    
   }
 
 
@@ -51,7 +52,7 @@ export class ListCoursesComponent {
     { control: 'duration', type: 'number', label: 'Duration (hrs)', placeholder: 'Enter duration in hours', readonly: false },
     { control: 'rating', type: 'number', label: 'Rating', placeholder: 'Enter rating', readonly: false },
     { control: 'description', type: 'textarea', label: 'Description', placeholder: 'Enter description', readonly: false },
-    { control: 'url', type: 'text', label: 'Image URL', placeholder: 'Enter image URL', readonly: false },
+    { control: 'url', type: 'file', label: 'Image URL', placeholder: 'Enter image URL', readonly: false },
     { control: 'id', type: 'text', label: 'Id', readonly: true }
   ];
 
@@ -67,11 +68,12 @@ export class ListCoursesComponent {
 
   editCourseForm(formValue: any) {
      if (formValue.id) {
+      this.store.dispatch(showModalAction({ value: true }));
     this.store.dispatch(updateCourse({ course: formValue }));
   } else {
     this.store.dispatch(addCourse({ course: formValue }));
   }
-  this.store.dispatch(closeModal());
+  // this.store.dispatch(closeModal());
   }
 
 

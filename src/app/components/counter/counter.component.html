@@ -1,11 +1,11 @@
-<ion-card>
+<ion-card ngSkipHydration>
   <ion-card-header>
     <ion-card-title>Counter</ion-card-title>
     <ion-card-subtitle>Counter Subtitle</ion-card-subtitle>
   </ion-card-header>
 
   <ion-card-content>
-    <h2>Counter : {{ counter}}</h2>
+    <h2>Counter : {{ counter$ | async }}</h2>
     <div class="button-group">
       <ion-button (click)="onIncrement()">Increment</ion-button>
       <ion-button (click)="onDecrement()">Decrement</ion-button>
@@ -14,8 +14,8 @@
     <hr />
     
     <div class="input-group">
-      <ion-button class="input-label" (click)="onToggleInput()">{{showInput ? '-' : '+'}}</ion-button>
-      <ion-input type="text" [(ngModel)]="inputValue" *ngIf="showInput"></ion-input>
+      <ion-button class="input-label" (click)="onToggleInput()">{{(toggle$ | async)  ? '-' : '+'}}</ion-button>
+      <ion-input type="text" [(ngModel)]="inputValue" *ngIf="toggle$ | async"></ion-input>
       <ion-button (click)="onAddValue(inputValue)">Add</ion-button>
     </div>
   </ion-card-content>
