@@ -1,1 +1,19 @@
-<p>card works!</p>
+<ng-container *ngIf="data != null; else noData">
+  <ion-card class="course-card">
+    <img [src]="data?.url" alt="Course Image" class="course-image" />
+    <ion-card-header>
+      <ion-card-title style="margin-left:16px; font-size: large; font-weight: 900;" class="truncated-text">{{ data?.courseName | truncate : 6 }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Instructor:</strong> {{ data?.instructor }}</p>
+      <p><strong>Duration:</strong> {{ data?.duration }} hours</p>
+      <p><strong>Rating:</strong> {{ data?.rating }} ⭐</p>
+      <p class="truncated-text"><strong>Description:</strong> {{ data?.description | truncate : 20 }} </p>
+      <p><strong>Price:</strong> {{ data?.price }}</p>
+    </ion-card-content>
+  </ion-card>
+</ng-container>
+
+<ng-template #noData>
+  <p>No course data available.</p>
+</ng-template>

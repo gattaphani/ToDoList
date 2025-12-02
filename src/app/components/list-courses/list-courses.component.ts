@@ -12,10 +12,11 @@ import { closeModal, openModal } from '../../store/modal.actions';
 import { DynamicField, ReusableFormComponent } from '../../shared/reusable-form/reusable-form.component';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AppState } from '../../store/app.state';
+import { CardComponent } from "../../shared/card/card.component";
 
 @Component({
   selector: 'app-list-courses',
-  imports: [CommonModule, IonicModule, ModalComponent, ReusableFormComponent],
+  imports: [CommonModule, IonicModule, ModalComponent, ReusableFormComponent, CardComponent],
   standalone: true,
   templateUrl: './list-courses.component.html',
   styleUrl: './list-courses.component.scss'
@@ -52,6 +53,7 @@ export class ListCoursesComponent {
     { control: 'duration', type: 'number', label: 'Duration (hrs)', placeholder: 'Enter duration in hours', readonly: false },
     { control: 'rating', type: 'number', label: 'Rating', placeholder: 'Enter rating', readonly: false },
     { control: 'description', type: 'textarea', label: 'Description', placeholder: 'Enter description', readonly: false },
+    { control: 'price', type: 'text', label: 'Price', placeholder: 'Enter price', readonly: false },
     { control: 'url', type: 'file', label: 'Image URL', placeholder: 'Enter image URL', readonly: false },
     { control: 'id', type: 'text', label: 'Id', readonly: true }
   ];
@@ -63,6 +65,7 @@ export class ListCoursesComponent {
     rating: [1, Validators.min(1)],
     description: [''],
     url: [''],
+    price: [''],
     id: [''] // optional, backend will assign
   });
 

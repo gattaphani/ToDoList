@@ -13,6 +13,7 @@ import { provideEffects } from '@ngrx/effects';
 import { showModalSelector } from './store/courses.selector';
 import { AppComponent } from './app.component';
 import { AppReducer } from './store/app.state';
+import { TruncatePipe } from './Pipe/truncate-pipe';
 
 export const appConfig: ApplicationConfig = {
   providers:
@@ -21,6 +22,7 @@ export const appConfig: ApplicationConfig = {
         withFetch(),
       // withInterceptors([employeeInterceptor])
     ),
+      
       provideRouter(routes),
       provideClientHydration(),
       provideStore( AppReducer),
