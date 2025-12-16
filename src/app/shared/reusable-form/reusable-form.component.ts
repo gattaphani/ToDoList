@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { Course } from '../../Modal/courseModal';
 import { courseSelector, isEditModeSelector, selectedCourseSelector } from '../../store/courses.selector';
 import { Observable } from 'rxjs/internal/Observable';
+import { showModalAction } from '../../store/courses.actions';
 import { addCourse, selectedCourseAction, setEditModeAction , updateCourse} from '../../store/courses.actions';
 
 
@@ -138,6 +139,7 @@ if (this.editMode) {
     else {
       this.store.dispatch(addCourse({ course: this.form.value }));
     }
+   this.store.dispatch(showModalAction({ value: false }));
   }
 
 }
