@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { addCourse, addCourseSuccess, deleteCourse, deleteCourseSuccess, getCourses,
-loadCourses, loadCoursesSuccess, setEditMode, showModalAction, updateCourse, 
+loadCourses, loadCoursesSuccess, selectedCourseAction, setEditModeAction, showModalAction, updateCourse, 
 updateCourseSuccess } from "./courses.actions";
 import { CourseState, initialCourseState } from "./courses.state";
 
@@ -30,9 +30,9 @@ export const coursesReducer = createReducer<CourseState>(
     };
   }),
 
-  on(setEditMode, (state,  action) => {
+  on(setEditModeAction, (state,  action) => {
     console.log('Reducer setEditMode called:', action.isEditMode);
-    return {  ...state, isEditMode: action.isEditMode };
+    return {  ...state, isEditModeState: action.isEditMode  };
   }),
 
   on(loadCourses, (state) => {
@@ -53,6 +53,11 @@ export const coursesReducer = createReducer<CourseState>(
     return { ...state, courses: [...state.courses, course] };
   }),
 
+  on(selectedCourseAction, (state, { course }) => {
+    console.log('Reducer selectedCourse called:', course);
+    return { ...state, selectedCourse: course };
+  }),
+  
   on(updateCourse, (state, { course }) => {
     console.log('Reducer updateCourse called:', course);
     return { ...state, courses: state.courses.map(c => c.id === course.id ? course : c) };
@@ -73,4 +78,5 @@ export const coursesReducer = createReducer<CourseState>(
     if (id == null) return state;
     return { ...state, courses: state.courses.filter(c => c.id !== id) };
   })
+
 );

@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { closeModal } from '../../store/modal.actions';
 import { IonicModule } from '@ionic/angular';
-import { showModalAction } from '../../store/courses.actions';
-import { showModalSelector } from '../../store/courses.selector';
+import { showModalAction, setEditModeAction } from '../../store/courses.actions';
+import { isEditModeSelector, showModalSelector } from '../../store/courses.selector';
 import { Observable } from 'rxjs';
 // import { ReusableFormComponent } from '../../shared/reusable-form/reusable-form.component';
 
@@ -15,27 +15,21 @@ import { Observable } from 'rxjs';
   styleUrl: './modal.component.scss'
 })
 export class ModalComponent {
-  showModal$ : Observable<boolean> | null = null;
+  showModal$: Observable<boolean> | null = null;
   @Input() data: any;
   @Input() isModalOpen: boolean | null = null;
   @Output() editFormData = new EventEmitter<any>();
- constructor(private store: Store) {}
+  isEditMode$: Observable<boolean> | null = null;
+  constructor(private store: Store) { }
 
- ngOnInit() {
-     this.showModal$ = this.store.select(showModalSelector);
+  ngOnInit() {
+    this.showModal$ = this.store.select(showModalSelector);
+    //  this.isEditMode$ = this.store.select(isEditModeSelector);
   }
   onClose() {
-   this.store.dispatch(showModalAction({ value: false }));
-   this.store.select(showModalSelector).subscribe(val => {
-     console.log('Modal open state after close:', val);
-   })
-    // console.log('Close modal dispatched', this.data);
+    this.store.dispatch(showModalAction({ value: false }));
+    this.store.dispatch(setEditModeAction({ isEditMode: false }));
   }
-  // ngOnInit() {
-  //   this.getEditFormdata();
-  // }
-  getEditFormdata() {
-    console.log('Modal Component received data:', this.data);
-    this.editFormData.emit(this.data);
-  }
+
+
 }

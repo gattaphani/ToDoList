@@ -1,19 +1,54 @@
-<ng-container *ngIf="data != null; else noData">
-  <ion-card class="course-card">
-    <img [src]="data?.url" alt="Course Image" class="course-image" />
+@if (data) {
+  <ion-card class="course-card" ngSkipHydration>
+    
+    <img 
+      class="course-image"
+      [src]="data?.url" 
+      alt="Course Image" 
+    />
+
     <ion-card-header>
-      <ion-card-title style="margin-left:16px; font-size: large; font-weight: 900;" class="truncated-text">{{ data?.courseName | truncate : 6 }}</ion-card-title>
+      <ion-card-title style="margin-left:16px;font-weight: bold;font-size: medium;" class="truncated-text">
+        {{ data?.courseName | truncate : 6 }}
+      </ion-card-title>
     </ion-card-header>
+
     <ion-card-content>
       <p><strong>Instructor:</strong> {{ data?.instructor }}</p>
       <p><strong>Duration:</strong> {{ data?.duration }} hours</p>
       <p><strong>Rating:</strong> {{ data?.rating }} ⭐</p>
-      <p class="truncated-text"><strong>Description:</strong> {{ data?.description | truncate : 20 }} </p>
-      <p><strong>Price:</strong> {{ data?.price }}</p>
-    </ion-card-content>
-  </ion-card>
-</ng-container>
 
-<ng-template #noData>
+      <p class="truncated-text">
+        <strong>Description:</strong> 
+        {{ data?.description | truncate : 20 }}
+      </p>
+    <div class="align-items">
+    <strong>Price: {{ data?.price }}</strong>
+    <!-- <i class='far fa-edit' style='font-size:24px' (click)="onEdit(data)"></i> -->
+    <!-- <i style='font-size:24px' class='far'(click)="onEdit(data)">&#xf044;</i> -->
+    <ion-icon name="create-outline" (click)="onEdit(data)"></ion-icon>
+    <!-- <i style='font-size:24px' class='far'(click)="onDelete(data)"> &#xf485;</i> -->
+    <ion-icon name="trash-outline" (click)="onDelete(data)"></ion-icon>
+   
+    <!-- <ion-button color="primary" (click)="onEdit(data)">Edit</ion-button> -->
+    <!-- <ion-button color="danger" (click)="onDelete(data)">Delete</ion-button> -->
+    </div>
+  </ion-card-content>
+  </ion-card>
+} @else {
   <p>No course data available.</p>
-</ng-template>
+}
+
+<!-- <ion-modal>
+  <ng-template>
+    <app-modal>
+      <app-reusable-form
+        [fields]="fields"
+        [form]="form"
+        (submitForm)="onSubmit($event)"
+      >
+      </app-reusable-form>
+    </app-modal>
+  </ng-template>  
+</ion-modal> -->
+

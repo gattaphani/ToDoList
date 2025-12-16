@@ -1,24 +1,23 @@
 <ion-button (click)="onOpen()">Add Course</ion-button>
 <ion-modal [isOpen]="showModal$ | async" ngSkipHydration>
-  {{showModal$ | async}}
   <ng-template>
-    <app-modal [data]="selectedCourse" 
-    (editFormData)="editCourseForm($event)">
+    <app-modal [data]="selectedCourse" (editFormData)="editCourseForm($event)">
       <app-reusable-form
         [form]="courseForm"
         [fields]="fields"
-        [data]="selectedCourse"
+       
+        (setMode)="setEditMode($event)"
         (editFormDataChange)="editCourseForm($event)"
-        (submitForm)="submitForm($event)"
       ></app-reusable-form>
     </app-modal>
   </ng-template>
 </ion-modal>
 
-<!-- <ng-container *ngIf="courses$ | async as courses" ngSkipHydration>
+<!-- (submitForm)="editFormValue($event)"
+<ng-container *ngIf="courses$ | async as courses" ngSkipHydration>
   <ng-container *ngFor="let c of courses ?? []" ngSkipHydration> -->
-  <!-- <ion-card> -->
-    <!-- <ion-card-content>
+<!-- <ion-card> -->
+<!-- <ion-card-content>
       <img alt="no image" [src]=" c?.url " width="300" height="150" />
       <h2>Course Title: {{ c?.courseName }}</h2>
       <p>Course Id: {{ c?.id }}</p>
@@ -30,26 +29,43 @@
       <button (click)="onDelete(c)">Delete</button>
     </ion-card-content> -->
 <!-- <ng-container *ngIf="courses$ | async as courses" ngSkipHydration> -->
-   
-  <!-- <app-card
+
+<!-- <app-card
     [course]="c"
     (edit)="onEdit($event)"
     (delete)="onDelete($event)">
   </app-card> -->
 
-
 <ion-grid>
   <ion-row>
-    <ion-col size="12" size-md="3" *ngFor="let c of (courses$ | async) ?? []">
-      <app-card
-        [data]="c"
-        >
-      </app-card>
-    </ion-col>
+    @for (course of (courses$ | async) ?? []; track course.id) {
+      @if (course) {
+        <ion-col size="12" size-md="3">
+          <app-card
+            [data]="course"
+            (editForm)="editCourseForm($event)"
+            (delete)="onDelete($event)"
+            (setMode)="setEditMode($event)"
+          >
+          </app-card>
+        </ion-col>
+      }
+    }
   </ion-row>
 </ion-grid>
-<!-- </ng-container>  -->
 
-  <!-- </ion-card> -->
-<!-- </ng-container> -->
-<!-- </ng-container> -->
+<!-- @for (course of (courses$ | async) ?? []; track course.id) {
+  @if (course) {
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="3">
+          <app-card
+            [data]="course"
+            (submitForm)="submitForm($event)"
+            (delete)="onDelete(course)"
+          />
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  }
+} -->

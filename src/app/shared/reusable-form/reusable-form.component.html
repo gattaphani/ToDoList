@@ -1,7 +1,7 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="form">
   <ng-container *ngFor="let field of fields">
     <ng-container *ngIf="!(field.control === 'id' && !form.value.id)">
-      <ion-label>{{ field.label }} :</ion-label>
+      <ion-label style="font-weight: 600;">{{ field.label }} :</ion-label>
       <!-- Text Input -->
       <ion-list>
         <ion-item *ngIf="field.type !== 'textarea'">
@@ -29,6 +29,6 @@
   </ng-container>
 
   <ion-button type="submit">
-    {{ form.value.id ? "Update" : "Submit" }}
+    {{ editMode ? "Update" : "Submit" }}
   </ion-button>
 </form>

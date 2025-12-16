@@ -5,7 +5,7 @@ import { Course } from "../Modal/courseModal";
 export const showModalAction = createAction('Show Modal', props<{ value: boolean }>());
 // export const hideModalAction = createAction('Hide Modal', props<{ value: boolean }>());
 
-export const setEditMode = createAction('Set Edit Mode', props<{ isEditMode: boolean }>());
+export const setEditModeAction = createAction('Set Edit Mode', props<{ isEditMode: boolean }>());
 
 export const getCourses = createAction('Get Courses');
 console.log('Get Courses action created', getCourses);
@@ -46,6 +46,11 @@ export const deleteCourse = createAction(
 export const deleteCourseSuccess = createAction(
   '[Courses] Delete Success',
   props<{id: string| number| undefined }>()
+);
+
+export const selectedCourseAction = createAction(
+  '[Courses] Selected',
+  props<{ course: Course | null }>()
 );
 
 

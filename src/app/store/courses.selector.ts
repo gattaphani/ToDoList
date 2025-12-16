@@ -20,5 +20,9 @@ export const showModalSelector = createSelector(
 );
 
 export const isEditModeSelector = createSelector(
-  selectCourseState, (state) => state.isEditMode
+  selectCourseState, (state) => state.isEditModeState
+);
+
+export const selectedCourseSelector = createSelector(
+  selectCourseState, (state) => state.selectedCourse
 );
