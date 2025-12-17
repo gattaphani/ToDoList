@@ -24,9 +24,9 @@ import { CardComponent } from "../../shared/card/card.component";
 export class ListCoursesComponent {
   courses$!: Observable<Course[]>;
   showModal$!: Observable<boolean>;
-  selectedCourse: Course  | null = null;
+  selectedCourse: Course | null = null;
   isEditMode$!: Observable<boolean>;
-  
+
   @Output() editForm = new EventEmitter<Course | null>();
   @Output() editCourseFormEvent = new EventEmitter<number>();
   constructor(private store: Store<AppState>, private fb: FormBuilder) { }
@@ -36,15 +36,12 @@ export class ListCoursesComponent {
     this.showModal$ = this.store.select(showModalSelector);
     this.isEditMode$ = this.store.select(isEditModeSelector);
     this.store.dispatch(loadCourses());
-    }
-  
+  }
+
   onOpen() {
-     this.selectedCourse = null;
-     this.store.dispatch(showModalAction({ value: true }));
-      this.store.dispatch(setEditModeAction({ isEditMode: false }));
-      // this.store.select(showModalSelector).subscribe(val => {
-      //   console.log('Modal open state:', val);
-      // });
+    this.selectedCourse = null;
+    this.store.dispatch(showModalAction({ value: true }));
+    this.store.dispatch(setEditModeAction({ isEditMode: false }));
   }
 
 
@@ -57,7 +54,7 @@ export class ListCoursesComponent {
     { control: 'description', type: 'textarea', label: 'Description', placeholder: 'Enter description', readonly: false },
     { control: 'price', type: 'text', label: 'Price', placeholder: 'Enter price', readonly: false },
     { control: 'url', type: 'file', label: 'Image URL', placeholder: 'Enter image URL', readonly: false },
-    { control: 'id', type: 'text', label: 'Id', readonly: true }
+    // { control: 'id', type: 'text', label: 'Id', readonly: true }
   ];
 
   courseForm = this.fb.group({
@@ -68,41 +65,15 @@ export class ListCoursesComponent {
     description: [''],
     url: [''],
     price: [''],
-    id: [''] // optional, backend will assign
+    // id: [''] // optional, backend will assign
   });
 
-  // editCourseForm(formValue: any) {
-  //    if (formValue.id) {
-  //   this.store.dispatch(showModalAction({ value: true }));
-  //   this.store.dispatch(updateCourse({ course: formValue }));
-  //   this.store.dispatch(setEditModeAction({ isEditMode: true }));
-  // } else {
-  //   this.store.dispatch(addCourse({ course: formValue }));
-  //    this.store.dispatch(setEditModeAction({ isEditMode: false }));
-  // }
-  // // this.store.dispatch(closeModal());
-  // }
 
-
-  //   ngOnChanges(changes: SimpleChanges) {
-  //   if (this.selectedCourse) {
-  //     // Prepopulate form fields
-  //     console.log('Patching form with selectedCourse:',changes, this.selectedCourse);
-  //     this.courseForm.patchValue(this.selectedCourse);
-  //   }
-  // }
-  // onEdit(course:Course){
-  //   this.selectedCourse = course;
-  //   this.store.dispatch(showModalAction({ value: true }));
-  //   this.store.dispatch(setEditModeAction({ isEditMode: true }));
-  // }
-
-  onDelete(course: Course){
-    this.store.dispatch(deleteCourse({id: course.id}))
+  onDelete(course: Course) {
+    this.store.dispatch(deleteCourse({ id: course.id }))
   }
 
   setEditMode(mode: any) {
-    // this.store.dispatch(setEditModeAction({ isEditMode: mode }));
     console.log('Edit mode set to:', mode);
     mode.subscribe((isEditMode: boolean) => {
       console.log('Emitted isEditMode value:', isEditMode);
@@ -110,17 +81,10 @@ export class ListCoursesComponent {
     });
   }
 
-editCourseForm(formValue: any) {
-  // console.log('Form submitted with value:', formValue);
-  this.selectedCourse = formValue;
-    // if (formValue.id) {
-       this.courseForm.patchValue(formValue);
-       this.editCourseFormEvent.emit(formValue);
-    // this.store.dispatch(updateCourse({ course: formValue }));
-  // } 
-  // else {
-  //   this.store.dispatch(addCourse({ course: formValue }));
-  // }
-  // this.store.dispatch(showModalAction({ value: false }));
+  editCourseForm(formValue: any) {
+    this.selectedCourse = formValue;
+    this.courseForm.patchValue(formValue);
+    this.editCourseFormEvent.emit(formValue);
+  }
 }
-}
+
