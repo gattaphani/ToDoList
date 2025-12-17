@@ -90,6 +90,26 @@
       "description": "Master Java programming with hands-on examples.",
       "price": "$99",
       "url": "https://images.unsplash.com/photo-1518779578993-ec3579fee39f"
+    },
+    {
+      "id": 8,
+      "courseName": "Javascript",
+      "instructor": "Phani",
+      "duration": "20",
+      "rating": "4",
+      "description": "JS",
+      "url": "C:\\fakepath\\2ec2476b-c08d-4fcc-bf83-1ba7b62604ce-cover.png",
+      "price": "99"
+    },
+    {
+      "id": 7,
+      "courseName": "Java",
+      "instructor": "Phani",
+      "duration": "30",
+      "rating": "5",
+      "description": "Core Java",
+      "url": null,
+      "price": "99"
     }
   ]
 }

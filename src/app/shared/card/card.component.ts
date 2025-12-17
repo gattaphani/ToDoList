@@ -48,6 +48,7 @@ export class CardComponent {
   }
 
   onDelete(selectedData: any) {
+    console.log('Emitted delete with data:', selectedData)
     this.delete.emit(selectedData);
   }
 }
